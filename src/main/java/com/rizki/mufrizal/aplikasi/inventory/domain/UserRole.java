@@ -26,8 +26,8 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "tb_penjualan_detail", indexes = {
-    @Index(columnList = "kode_transaksi_penjualan_detail", name = "kodeTransaksiPenjualanDetail")
+@Table(name = "tb_user_role", indexes = {
+    @Index(columnList = "id_user_role", name = "idUserRole")
 })
 public class UserRole implements Serializable {
 

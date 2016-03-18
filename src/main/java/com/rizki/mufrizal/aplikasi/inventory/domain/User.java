@@ -22,8 +22,8 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "tb_penjualan_detail", indexes = {
-    @Index(columnList = "kode_transaksi_penjualan_detail", name = "kodeTransaksiPenjualanDetail")
+@Table(name = "tb_user", indexes = {
+    @Index(columnList = "email", name = "email")
 })
 public class User implements Serializable {
 
