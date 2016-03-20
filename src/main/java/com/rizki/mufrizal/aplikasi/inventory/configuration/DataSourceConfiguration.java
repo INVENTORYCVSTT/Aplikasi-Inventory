@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -65,6 +66,14 @@ public class DataSourceConfiguration {
         localSessionFactoryBean.setHibernateProperties(hibernateProperties());
         localSessionFactoryBean.setPackagesToScan("com.rizki.mufrizal.aplikasi.inventory.domain");
         return localSessionFactoryBean;
+    }
+
+    @Bean
+    public HibernateTransactionManager transactionManager() {
+        HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+        hibernateTransactionManager.setDataSource(dataSource());
+        hibernateTransactionManager.setSessionFactory(sessionFactory().getObject());
+        return hibernateTransactionManager;
     }
 
 }
