@@ -137,7 +137,7 @@ public class PenjualanController {
             penjualanSementara.setIdBarang(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 1)));
             penjualanSementara.setNamaBarang(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 2)));
             penjualanSementara.setJenisBarang(JenisBarang.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 3).toString()));
-            java.util.Date tanggal = new SimpleDateFormat("yyyy-MM-d").parse(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 4)));
+            java.util.Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 4)));
             penjualanSementara.setTanggalKadaluarsa(tanggal);
             penjualanSementara.setHargaSatuanBarang(BigDecimal.valueOf(Double.parseDouble(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 5).toString())));
 
