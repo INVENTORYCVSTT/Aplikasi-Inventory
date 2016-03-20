@@ -16,4 +16,8 @@ public interface UserService {
 
     public User loginUser(String email, String password);
 
+    public void simpanUser(User user);
+
+    public User cariUser(String email);
+
 }
