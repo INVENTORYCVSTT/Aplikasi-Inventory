@@ -2,8 +2,19 @@ package com.rizki.mufrizal.aplikasi.inventory.controller;
 
 import com.rizki.mufrizal.aplikasi.inventory.App;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.BarangAbstractTableModel;
+import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PenjualanSementaraAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.TableAutoResizeColumn;
+import com.rizki.mufrizal.aplikasi.inventory.domain.JenisBarang;
+import com.rizki.mufrizal.aplikasi.inventory.domain.PenjualanSementara;
 import com.rizki.mufrizal.aplikasi.inventory.view.PenjualanSimpanView;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +33,10 @@ public class PenjualanController {
     private final PenjualanSimpanView penjualanSimpanView;
     private static final Logger LOGGER = LoggerFactory.getLogger(PenjualanController.class);
     private BarangAbstractTableModel barangAbstractTableModel;
+    private PenjualanSementaraAbstractTableModel penjualanSementaraAbstractTableModel;
     private final TableAutoResizeColumn tableAutoResizeColumn = new TableAutoResizeColumn();
+
+    private final List<PenjualanSementara> penjualanSementaras = new ArrayList<>();
 
     public PenjualanController(PenjualanSimpanView penjualanSimpanView) {
         this.penjualanSimpanView = penjualanSimpanView;
@@ -98,5 +112,56 @@ public class PenjualanController {
         LOGGER.info("refresh paging : {}", pageNumber);
     }
     //end paging
+
+    private PenjualanSementara checkContains(PenjualanSementara penjualanSementara1, List<PenjualanSementara> penjualanSementaras1) {
+        Iterator<PenjualanSementara> iterator = penjualanSementaras1.iterator();
+        while (iterator.hasNext()) {
+            PenjualanSementara ps = iterator.next();
+            if (ps.getIdBarang().equals(penjualanSementara1.getIdBarang())) {
+                LOGGER.info("id sama : {}", ps.getIdBarang());
+                return ps;
+            }
+        }
+        LOGGER.info("Beda id");
+        return null;
+    }
+
+    public void tambahPenjualanSementara() {
+        try {
+            PenjualanSementara penjualanSementara = new PenjualanSementara();
+            Integer index = this.penjualanSimpanView.getTabelBarang().getSelectedRow();
+
+            Integer jumlahBarangYangTersedia = Integer.parseInt(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 6)));
+
+            //insert value
+            penjualanSementara.setIdBarang(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 1)));
+            penjualanSementara.setNamaBarang(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 2)));
+            penjualanSementara.setJenisBarang(JenisBarang.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 3).toString()));
+            java.util.Date tanggal = new SimpleDateFormat("yyyy-MM-d").parse(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 4)));
+            penjualanSementara.setTanggalKadaluarsa(tanggal);
+            penjualanSementara.setHargaSatuanBarang(BigDecimal.valueOf(Double.parseDouble(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 5).toString())));
+
+            PenjualanSementara ps = checkContains(penjualanSementara, penjualanSementaras);
+
+            if (ps != null) {
+                penjualanSementara.setJumlahBarang(ps.getJumlahBarang() + 1);
+                int indexItem = penjualanSementaras.indexOf(ps);
+                penjualanSementaras.set(indexItem, penjualanSementara);
+            } else {
+                penjualanSementara.setJumlahBarang(1);
+                penjualanSementaras.add(penjualanSementara);
+            }
+
+            tampilPenjualanSementara();
+        } catch (ParseException ex) {
+            LOGGER.error("error di : {}", ex);
+        }
+    }
+
+    public void tampilPenjualanSementara() {
+        penjualanSementaraAbstractTableModel = new PenjualanSementaraAbstractTableModel(penjualanSementaras);
+        this.penjualanSimpanView.getTabelPenjualanSementara().setModel(penjualanSementaraAbstractTableModel);
+        tableAutoResizeColumn.autoResizeColumn(this.penjualanSimpanView.getTabelPenjualanSementara());
+    }
 
 }
