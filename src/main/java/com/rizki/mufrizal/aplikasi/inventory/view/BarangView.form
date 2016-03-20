@@ -49,7 +49,7 @@
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jumlahBarang" max="32767" attributes="0"/>
-                          <Component id="jLabel8" max="32767" attributes="0"/>
+                          <Component id="idBarang" max="32767" attributes="0"/>
                           <Component id="namaBarang" max="32767" attributes="0"/>
                           <Component id="jenisBarang" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                           <Component id="tanggalKadaluarsa" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel8" min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="idBarang" min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -150,7 +150,7 @@
         <Property name="text" type="java.lang.String" value="Jumlah Barang"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
+    <Component class="javax.swing.JLabel" name="idBarang">
     </Component>
     <Component class="javax.swing.JTextField" name="namaBarang">
     </Component>
@@ -191,7 +191,11 @@
                 <Column editable="true" title="Title 4" type="java.lang.Object"/>
               </Table>
             </Property>
+            <Property name="autoResizeMode" type="int" value="0"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelBarangMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -253,6 +257,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Update"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="simpan">
           <Properties>
@@ -266,6 +273,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Hapus"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hapusActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -305,15 +315,17 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="first" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="previous" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="next" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="last" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="perPage" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="refresh" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="labelTotalRecord" alignment="0" min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="labelPaging" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="first" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="previous" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="next" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="last" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="perPage" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="refresh" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelPaging" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
               </Group>
