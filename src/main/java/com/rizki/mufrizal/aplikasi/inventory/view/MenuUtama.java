@@ -6,24 +6,13 @@ package com.rizki.mufrizal.aplikasi.inventory.view;
  */
 public class MenuUtama extends javax.swing.JFrame {
 
-    private final BarangView barangView;
-    private final PenjualanView penjualanView;
-    private final PembelianView pembelianView;
+    private BarangView barangView;
+    private PenjualanView penjualanView;
+    private PenjualanSimpanView penjualanSimpanView;
+    private PembelianView pembelianView;
 
     public MenuUtama() {
         initComponents();
-        barangView = BarangView.getInstanceBarangView();
-        penjualanView = PenjualanView.getInstancePenjualanView();
-        pembelianView = PembelianView.getInstancePembelianView();
-
-        desktopPane.add(barangView);
-        desktopPane.add(penjualanView);
-        desktopPane.add(pembelianView);
-
-        barangView.setVisible(Boolean.FALSE);
-        penjualanView.setVisible(Boolean.FALSE);
-        pembelianView.setVisible(Boolean.FALSE);
-
         java.awt.EventQueue.invokeLater(() -> {
             LoginView dialog = new LoginView(new javax.swing.JFrame(), Boolean.TRUE);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -44,10 +33,14 @@ public class MenuUtama extends javax.swing.JFrame {
         menu = new javax.swing.JMenuBar();
         file = new javax.swing.JMenu();
         exit = new javax.swing.JMenuItem();
-        edit = new javax.swing.JMenu();
-        menuBarang = new javax.swing.JMenuItem();
-        menuPenjualan = new javax.swing.JMenuItem();
-        menuPembelian = new javax.swing.JMenuItem();
+        menuBarang = new javax.swing.JMenu();
+        menuItemBarang = new javax.swing.JMenuItem();
+        menuPenjualan = new javax.swing.JMenu();
+        menuItemPenjualan = new javax.swing.JMenuItem();
+        menuItemTambahDataPenjualan = new javax.swing.JMenuItem();
+        menuPembelian = new javax.swing.JMenu();
+        menuItemPembelian = new javax.swing.JMenuItem();
+        menuItemTambahDataPembelian = new javax.swing.JMenuItem();
         help = new javax.swing.JMenu();
         about = new javax.swing.JMenuItem();
 
@@ -60,33 +53,52 @@ public class MenuUtama extends javax.swing.JFrame {
 
         menu.add(file);
 
-        edit.setText("Edit");
+        menuBarang.setText("Barang");
 
-        menuBarang.setText("Data Barang");
-        menuBarang.addActionListener(new java.awt.event.ActionListener() {
+        menuItemBarang.setText("Data Barang");
+        menuItemBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuBarangActionPerformed(evt);
+                menuItemBarangActionPerformed(evt);
             }
         });
-        edit.add(menuBarang);
+        menuBarang.add(menuItemBarang);
 
-        menuPenjualan.setText("Data Penjualan");
-        menuPenjualan.addActionListener(new java.awt.event.ActionListener() {
+        menu.add(menuBarang);
+
+        menuPenjualan.setText("Penjualan");
+
+        menuItemPenjualan.setText("Data Penjualan");
+        menuItemPenjualan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPenjualanActionPerformed(evt);
+                menuItemPenjualanActionPerformed(evt);
             }
         });
-        edit.add(menuPenjualan);
+        menuPenjualan.add(menuItemPenjualan);
 
-        menuPembelian.setText("Data Pembelian");
-        menuPembelian.addActionListener(new java.awt.event.ActionListener() {
+        menuItemTambahDataPenjualan.setText("Tambah Data Penjualan");
+        menuItemTambahDataPenjualan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPembelianActionPerformed(evt);
+                menuItemTambahDataPenjualanActionPerformed(evt);
             }
         });
-        edit.add(menuPembelian);
+        menuPenjualan.add(menuItemTambahDataPenjualan);
 
-        menu.add(edit);
+        menu.add(menuPenjualan);
+
+        menuPembelian.setText("Pembelian");
+
+        menuItemPembelian.setText("Data Pembelian");
+        menuItemPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemPembelianActionPerformed(evt);
+            }
+        });
+        menuPembelian.add(menuItemPembelian);
+
+        menuItemTambahDataPembelian.setText("Tambah Data Pembelian");
+        menuPembelian.add(menuItemTambahDataPembelian);
+
+        menu.add(menuPembelian);
 
         help.setText("Help");
 
@@ -111,46 +123,60 @@ public class MenuUtama extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarangActionPerformed
+    private void menuItemBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBarangActionPerformed
+        barangView = BarangView.getInstanceBarangView();
         if (barangView.isVisible()) {
             System.out.println("udh ada broe");
         } else {
-            desktopPane.remove(barangView);
             desktopPane.add(barangView);
             barangView.setVisible(Boolean.TRUE);
         }
-    }//GEN-LAST:event_menuBarangActionPerformed
+    }//GEN-LAST:event_menuItemBarangActionPerformed
 
-    private void menuPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPenjualanActionPerformed
+    private void menuItemPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPenjualanActionPerformed
+        penjualanView = PenjualanView.getInstancePenjualanView();
         if (penjualanView.isVisible()) {
             System.out.println("udh ada broe");
         } else {
-            desktopPane.remove(penjualanView);
             desktopPane.add(penjualanView);
             penjualanView.setVisible(Boolean.TRUE);
         }
-    }//GEN-LAST:event_menuPenjualanActionPerformed
+    }//GEN-LAST:event_menuItemPenjualanActionPerformed
 
-    private void menuPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPembelianActionPerformed
+    private void menuItemPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPembelianActionPerformed
+        pembelianView = PembelianView.getInstancePembelianView();
         if (pembelianView.isVisible()) {
             System.out.println("udh ada broe");
         } else {
-            desktopPane.remove(pembelianView);
             desktopPane.add(pembelianView);
             pembelianView.setVisible(Boolean.TRUE);
         }
-    }//GEN-LAST:event_menuPembelianActionPerformed
+    }//GEN-LAST:event_menuItemPembelianActionPerformed
+
+    private void menuItemTambahDataPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTambahDataPenjualanActionPerformed
+        penjualanSimpanView = PenjualanSimpanView.getInstancePenjualanSimpanView();
+        if (penjualanSimpanView.isVisible()) {
+            System.out.println("udh ada broe");
+        } else {
+            desktopPane.add(penjualanSimpanView);
+            penjualanSimpanView.setVisible(Boolean.TRUE);
+        }
+    }//GEN-LAST:event_menuItemTambahDataPenjualanActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu edit;
     private javax.swing.JMenuItem exit;
     private javax.swing.JMenu file;
     private javax.swing.JMenu help;
     private javax.swing.JMenuBar menu;
-    private javax.swing.JMenuItem menuBarang;
-    private javax.swing.JMenuItem menuPembelian;
-    private javax.swing.JMenuItem menuPenjualan;
+    private javax.swing.JMenu menuBarang;
+    private javax.swing.JMenuItem menuItemBarang;
+    private javax.swing.JMenuItem menuItemPembelian;
+    private javax.swing.JMenuItem menuItemPenjualan;
+    private javax.swing.JMenuItem menuItemTambahDataPembelian;
+    private javax.swing.JMenuItem menuItemTambahDataPenjualan;
+    private javax.swing.JMenu menuPembelian;
+    private javax.swing.JMenu menuPenjualan;
     // End of variables declaration//GEN-END:variables
 }
