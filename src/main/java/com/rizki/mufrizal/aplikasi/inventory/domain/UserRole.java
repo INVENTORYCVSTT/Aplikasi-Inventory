@@ -38,7 +38,7 @@ public class UserRole implements Serializable {
     private String idUserRole;
 
     @Column(name = "role", length = 10)
-    private String role;
+    private String role = "ROLE_USER";
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "email", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
