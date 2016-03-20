@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class RegisterView extends javax.swing.JDialog {
 
     private final GroupLayout groupLayout;
-    private WorkerLogin workerLogin;
+    private WorkerRegister workerRegister;
     private final UserController userController = new UserController(this);
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterView.class);
 
@@ -135,9 +135,9 @@ public class RegisterView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
-        if (workerLogin != null && !workerLogin.isDone()) {
-            workerLogin.cancel(Boolean.TRUE);
-            workerLogin = null;
+        if (workerRegister != null && !workerRegister.isDone()) {
+            workerRegister.cancel(Boolean.TRUE);
+            workerRegister = null;
         }
 
         try {
@@ -145,8 +145,8 @@ public class RegisterView extends javax.swing.JDialog {
         } catch (java.lang.IllegalArgumentException ae) {
         }
 
-        workerLogin = new WorkerLogin();
-        workerLogin.execute();
+        workerRegister = new WorkerRegister();
+        workerRegister.execute();
 
         register.setEnabled(Boolean.FALSE);
         login.setEnabled(Boolean.FALSE);
@@ -197,7 +197,7 @@ public class RegisterView extends javax.swing.JDialog {
         return progressBar;
     }
 
-    private class WorkerLogin extends SwingWorker<User, Void> {
+    private class WorkerRegister extends SwingWorker<User, Void> {
 
         @Override
         protected void done() {
