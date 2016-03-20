@@ -39,8 +39,18 @@ public class BarangRepositoryImpl implements BarangRepository {
     }
 
     @Override
-    public List<Barang> ambilBarangs() {
-        return sessionFactory.getCurrentSession().createCriteria(Barang.class).list();
+    public Integer jumlahBarang() {
+        return sessionFactory.getCurrentSession().createCriteria(Barang.class).list().size();
+    }
+
+    @Override
+    public List<Barang> ambilBarangs(Integer pageNumber, Integer rowsPerPage) {
+        return sessionFactory
+                .getCurrentSession()
+                .createCriteria(Barang.class)
+                .setFirstResult(rowsPerPage * (pageNumber - 1))
+                .setMaxResults(rowsPerPage)
+                .list();
     }
 
 }
