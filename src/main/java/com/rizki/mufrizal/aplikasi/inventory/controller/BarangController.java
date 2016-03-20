@@ -7,6 +7,8 @@ import com.rizki.mufrizal.aplikasi.inventory.domain.Barang;
 import com.rizki.mufrizal.aplikasi.inventory.domain.JenisBarang;
 import com.rizki.mufrizal.aplikasi.inventory.view.BarangView;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,8 +104,32 @@ public class BarangController {
         ambilDataBarang();
         LOGGER.info("refresh paging : {}", pageNumber);
     }
-
     //end paging
+
+    public void tampilkanBarang() {
+        try {
+            Integer index = this.barangView.getTabelBarang().getSelectedRow();
+            this.barangView.getIdBarang().setText(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 1)));
+            this.barangView.getNamaBarang().setText(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 2)));
+            this.barangView.getJenisBarang().setSelectedItem(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 3)));
+            java.util.Date tanggal = new SimpleDateFormat("yyyy-MM-d").parse(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 4)));
+            this.barangView.getTanggalKadaluarsa().setDate(tanggal);
+            this.barangView.getHargaSatuan().setText(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 5)));
+            this.barangView.getJumlahBarang().setText(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 6)));
+        } catch (ParseException ex) {
+            LOGGER.error("error di : {}", ex);
+        }
+    }
+
+    public void clear() {
+        this.barangView.getIdBarang().setText(null);
+        this.barangView.getNamaBarang().setText(null);
+        this.barangView.getJenisBarang().setSelectedIndex(0);
+        this.barangView.getTanggalKadaluarsa().setDate(null);
+        this.barangView.getHargaSatuan().setText(null);
+        this.barangView.getJumlahBarang().setText(null);
+    }
+
     public void simpanBarang() {
         Barang barang = new Barang();
         barang.setNamaBarang(this.barangView.getNamaBarang().getText());
@@ -118,5 +144,46 @@ public class BarangController {
 
         JOptionPane.showMessageDialog(null, "Data barang berhasil disimpan", "Info", JOptionPane.INFORMATION_MESSAGE);
         ambilDataBarang();
+        clear();
+    }
+
+    public void editBarang() {
+        Barang barang = new Barang();
+        barang.setIdBarang(this.barangView.getIdBarang().getText());
+        barang.setNamaBarang(this.barangView.getNamaBarang().getText());
+        barang.setJenisBarang(JenisBarang.valueOf(this.barangView.getJenisBarang().getSelectedItem().toString()));
+        barang.setTanggalKadaluarsa(this.barangView.getTanggalKadaluarsa().getDate());
+        barang.setHargaSatuanBarang(BigDecimal.valueOf(Double.valueOf(this.barangView.getHargaSatuan().getText())));
+        barang.setJumlahBarang(Integer.parseInt(this.barangView.getJumlahBarang().getText()));
+
+        App.barangService().editBarang(barang);
+
+        LOGGER.debug("prosess edit barang : {}", barang);
+
+        JOptionPane.showMessageDialog(null, "Data barang berhasil diedit", "Info", JOptionPane.INFORMATION_MESSAGE);
+        ambilDataBarang();
+        clear();
+    }
+
+    public void hapusBarang() {
+        Barang barang = new Barang();
+        barang.setIdBarang(this.barangView.getIdBarang().getText());
+        barang.setNamaBarang(this.barangView.getNamaBarang().getText());
+        barang.setJenisBarang(JenisBarang.valueOf(this.barangView.getJenisBarang().getSelectedItem().toString()));
+        barang.setTanggalKadaluarsa(this.barangView.getTanggalKadaluarsa().getDate());
+        barang.setHargaSatuanBarang(BigDecimal.valueOf(Double.valueOf(this.barangView.getHargaSatuan().getText())));
+        barang.setJumlahBarang(Integer.parseInt(this.barangView.getJumlahBarang().getText()));
+
+        int pilih = JOptionPane.showConfirmDialog(null, "Apakah data ingin dihapus ?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (pilih == JOptionPane.YES_OPTION) {
+
+            App.barangService().hapusBarang(barang);
+            LOGGER.debug("prosess hapus barang : {}", barang);
+
+            JOptionPane.showMessageDialog(null, "Data barang berhasil dihapus", "Info", JOptionPane.INFORMATION_MESSAGE);
+            ambilDataBarang();
+            clear();
+        }
     }
 }
