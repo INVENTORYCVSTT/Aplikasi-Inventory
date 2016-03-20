@@ -28,6 +28,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((dimension.width / 2) - (getSize().width / 2), (dimension.height / 2) - (getSize().height / 2));
         penjualanController.ambilDataBarang();
+        penjualanController.tampilPenjualanSementara();
     }
 
     @SuppressWarnings("unchecked")
@@ -50,7 +51,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabelBarangYangDibeli = new javax.swing.JTable();
+        tabelPenjualanSementara = new javax.swing.JTable();
         transaksi = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -75,6 +76,11 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
             }
         ));
         tabelBarang.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tabelBarang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelBarangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelBarang);
 
         keyCari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Barang", "Nama Barang", "Jenis Barang" }));
@@ -180,7 +186,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        tabelBarangYangDibeli.setModel(new javax.swing.table.DefaultTableModel(
+        tabelPenjualanSementara.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -191,8 +197,8 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tabelBarangYangDibeli.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jScrollPane2.setViewportView(tabelBarangYangDibeli);
+        tabelPenjualanSementara.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane2.setViewportView(tabelPenjualanSementara);
 
         transaksi.setText("Lakukan Transaksi");
 
@@ -299,6 +305,10 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         penjualanController.firstPaging();
     }//GEN-LAST:event_firstActionPerformed
 
+    private void tabelBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelBarangMouseClicked
+        penjualanController.tambahPenjualanSementara();
+    }//GEN-LAST:event_tabelBarangMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cari;
@@ -320,7 +330,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
     private javax.swing.JButton previous;
     private javax.swing.JButton refresh;
     private javax.swing.JTable tabelBarang;
-    private javax.swing.JTable tabelBarangYangDibeli;
+    private javax.swing.JTable tabelPenjualanSementara;
     private com.toedter.calendar.JDateChooser tanggalPenjualan;
     private javax.swing.JButton transaksi;
     private javax.swing.JTextField valueCari;
@@ -394,5 +404,12 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
      */
     public javax.swing.JTextField getValueCari() {
         return valueCari;
+    }
+
+    /**
+     * @return the tabelPenjualanSementara
+     */
+    public javax.swing.JTable getTabelPenjualanSementara() {
+        return tabelPenjualanSementara;
     }
 }
