@@ -20,9 +20,20 @@ public class MenuUtama extends javax.swing.JFrame {
         desktopPane.add(penjualanView);
         desktopPane.add(pembelianView);
 
-        barangView.setVisible(false);
-        penjualanView.setVisible(false);
-        pembelianView.setVisible(false);
+        barangView.setVisible(Boolean.FALSE);
+        penjualanView.setVisible(Boolean.FALSE);
+        pembelianView.setVisible(Boolean.FALSE);
+
+        java.awt.EventQueue.invokeLater(() -> {
+            LoginView dialog = new LoginView(new javax.swing.JFrame(), Boolean.TRUE);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(Boolean.TRUE);
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -106,7 +117,7 @@ public class MenuUtama extends javax.swing.JFrame {
         } else {
             desktopPane.remove(barangView);
             desktopPane.add(barangView);
-            barangView.setVisible(true);
+            barangView.setVisible(Boolean.TRUE);
         }
     }//GEN-LAST:event_menuBarangActionPerformed
 
@@ -116,7 +127,7 @@ public class MenuUtama extends javax.swing.JFrame {
         } else {
             desktopPane.remove(penjualanView);
             desktopPane.add(penjualanView);
-            penjualanView.setVisible(true);
+            penjualanView.setVisible(Boolean.TRUE);
         }
     }//GEN-LAST:event_menuPenjualanActionPerformed
 
@@ -126,7 +137,7 @@ public class MenuUtama extends javax.swing.JFrame {
         } else {
             desktopPane.remove(pembelianView);
             desktopPane.add(pembelianView);
-            pembelianView.setVisible(true);
+            pembelianView.setVisible(Boolean.TRUE);
         }
     }//GEN-LAST:event_menuPembelianActionPerformed
 
