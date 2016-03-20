@@ -1,5 +1,8 @@
 package com.rizki.mufrizal.aplikasi.inventory;
 
+import com.rizki.mufrizal.aplikasi.inventory.service.BarangService;
+import com.rizki.mufrizal.aplikasi.inventory.service.PenjualanService;
+import com.rizki.mufrizal.aplikasi.inventory.service.UserService;
 import com.rizki.mufrizal.aplikasi.inventory.view.MenuUtama;
 import javax.swing.JFrame;
 import org.slf4j.Logger;
@@ -23,6 +26,7 @@ public class App {
     private static ApplicationContext applicationContext;
 
     public static void main(String[] args) {
+        LOGGER.info("load konfigurasi spring hibernate annotation");
         applicationContext = new AnnotationConfigApplicationContext("com.rizki.mufrizal.aplikasi.inventory.configuration");
 
         try {
@@ -32,23 +36,31 @@ public class App {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            LOGGER.error("error di : {}", ex);
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                MenuUtama menuUtama = new MenuUtama();
-                menuUtama.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                menuUtama.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            LOGGER.info("jalankan menu utama");
+            MenuUtama menuUtama = new MenuUtama();
+            menuUtama.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            menuUtama.setVisible(Boolean.TRUE);
         });
+    }
+
+    public static UserService userService() {
+        LOGGER.info("inisialisasi bean user service pada spring");
+        return (UserService) applicationContext.getBean("UserService");
+    }
+
+    public static BarangService barangService() {
+        LOGGER.info("inisialisasi bean barang service pada spring");
+        return (BarangService) applicationContext.getBean("BarangService");
+    }
+
+    public static PenjualanService penjualanService() {
+        LOGGER.info("inisialisasi bean penjualan service pada spring");
+        return (PenjualanService) applicationContext.getBean("PenjualanService");
     }
 
 }
