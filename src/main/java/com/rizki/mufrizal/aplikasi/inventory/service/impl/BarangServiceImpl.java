@@ -44,8 +44,13 @@ public class BarangServiceImpl implements BarangService {
     }
 
     @Override
-    public List<Barang> ambilBarangs() {
-        return barangRepository.ambilBarangs();
+    public Integer jumlahBarang() {
+        return barangRepository.jumlahBarang();
+    }
+
+    @Override
+    public List<Barang> ambilBarangs(Integer pageNumber, Integer rowsPerPage) {
+        return barangRepository.ambilBarangs(pageNumber, rowsPerPage);
     }
 
 }
