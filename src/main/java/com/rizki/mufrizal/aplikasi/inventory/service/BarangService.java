@@ -21,6 +21,8 @@ public interface BarangService {
 
     public void hapusBarang(Barang barang);
 
-    public List<Barang> ambilBarangs();
+    public Integer jumlahBarang();
+
+    public List<Barang> ambilBarangs(Integer pageNumber, Integer rowsPerPage);
 
 }
