@@ -35,7 +35,7 @@ public class User implements Serializable {
     private String password;
 
     @Column(name = "enable")
-    private Boolean enable = Boolean.FALSE;
+    private Boolean enable = Boolean.TRUE;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<UserRole> userRoles;
