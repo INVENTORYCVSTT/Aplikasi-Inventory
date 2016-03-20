@@ -25,7 +25,7 @@ public class BarangAbstractTableModel extends AbstractTableModel {
         "Jenis Barang",
         "Tanggal Kadaluarsa",
         "Harga Satuan",
-        "Jumlah"
+        "Jumlah Barang"
     };
 
     public BarangAbstractTableModel(List<Barang> barangs) {
