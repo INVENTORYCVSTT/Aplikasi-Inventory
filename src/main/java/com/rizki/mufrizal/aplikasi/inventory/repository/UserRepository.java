@@ -14,6 +14,10 @@ import com.rizki.mufrizal.aplikasi.inventory.domain.User;
  */
 public interface UserRepository {
 
-    public User loginUser(String email, String password);
+    public User loginUser(String email);
+
+    public void simpanUser(User user);
+
+    public User cariUser(String email);
 
 }
