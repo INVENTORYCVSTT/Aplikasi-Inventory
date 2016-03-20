@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+
+<!--
+@Author Rizki Mufrizal <mufrizalrizki@gmail.com>
+@Since Mar 20, 2016
+@Time 1:11:14 PM
+@Encoding UTF-8
+@Project Aplikasi-Inventory
+@Package Expression package is undefined on line 9, column 12 in Templates/XML/XMLDocument.xml.
+-->
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+    <diskStore path="java.io.tmpdir" />
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        overflowToDisk="true" />
+    <cache name="barang"
+           maxElementsInMemory="10"
+           eternal="true"
+           overflowToDisk="true" />
+</ehcache>
