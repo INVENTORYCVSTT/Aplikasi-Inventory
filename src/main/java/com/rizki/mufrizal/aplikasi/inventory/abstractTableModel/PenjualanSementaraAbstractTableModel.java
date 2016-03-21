@@ -25,7 +25,8 @@ public class PenjualanSementaraAbstractTableModel extends AbstractTableModel {
         "Jenis Barang",
         "Tanggal Kadaluarsa",
         "Harga Satuan",
-        "Jumlah Barang"
+        "Jumlah Barang",
+        "Total Harga"
     };
 
     public PenjualanSementaraAbstractTableModel(List<PenjualanSementara> penjualanSementaras) {
@@ -62,9 +63,11 @@ public class PenjualanSementaraAbstractTableModel extends AbstractTableModel {
             case 4:
                 return penjualanSementara.getTanggalKadaluarsa();
             case 5:
-                return penjualanSementara.getHargaSatuanBarang();
+                return "Rp " + penjualanSementara.getHargaSatuanBarang();
             case 6:
                 return penjualanSementara.getJumlahBarang();
+            case 7:
+                return "Rp " + (penjualanSementara.getHargaSatuanBarang().intValue() * penjualanSementara.getJumlahBarang());
             default:
                 return null;
         }
