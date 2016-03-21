@@ -25,4 +25,5 @@ public interface BarangService {
 
     public List<Barang> ambilBarangs(Integer pageNumber, Integer rowsPerPage);
 
+    public Barang getBarang(String idBarang);
 }
