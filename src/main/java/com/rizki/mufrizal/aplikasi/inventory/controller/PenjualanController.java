@@ -4,17 +4,20 @@ import com.rizki.mufrizal.aplikasi.inventory.App;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.BarangAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PenjualanSementaraAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.TableAutoResizeColumn;
+import com.rizki.mufrizal.aplikasi.inventory.domain.Barang;
 import com.rizki.mufrizal.aplikasi.inventory.domain.JenisBarang;
+import com.rizki.mufrizal.aplikasi.inventory.domain.Penjualan;
+import com.rizki.mufrizal.aplikasi.inventory.domain.PenjualanDetail;
 import com.rizki.mufrizal.aplikasi.inventory.domain.PenjualanSementara;
 import com.rizki.mufrizal.aplikasi.inventory.view.PenjualanSimpanView;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import javax.swing.JOptionPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -144,9 +147,13 @@ public class PenjualanController {
             PenjualanSementara ps = checkContains(penjualanSementara, penjualanSementaras);
 
             if (ps != null) {
-                penjualanSementara.setJumlahBarang(ps.getJumlahBarang() + 1);
-                int indexItem = penjualanSementaras.indexOf(ps);
-                penjualanSementaras.set(indexItem, penjualanSementara);
+                if (ps.getJumlahBarang() + 1 <= jumlahBarangYangTersedia) {
+                    penjualanSementara.setJumlahBarang(ps.getJumlahBarang() + 1);
+                    int indexItem = penjualanSementaras.indexOf(ps);
+                    penjualanSementaras.set(indexItem, penjualanSementara);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Stok Barang tidak cukup", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
             } else {
                 penjualanSementara.setJumlahBarang(1);
                 penjualanSementaras.add(penjualanSementara);
@@ -162,6 +169,43 @@ public class PenjualanController {
         penjualanSementaraAbstractTableModel = new PenjualanSementaraAbstractTableModel(penjualanSementaras);
         this.penjualanSimpanView.getTabelPenjualanSementara().setModel(penjualanSementaraAbstractTableModel);
         tableAutoResizeColumn.autoResizeColumn(this.penjualanSimpanView.getTabelPenjualanSementara());
+    }
+
+    public void simpanTransaksi() {
+        Penjualan penjualan = new Penjualan();
+        List<PenjualanDetail> penjualanDetails = new ArrayList<>();
+        BigDecimal totalHarga = new BigDecimal(BigInteger.ZERO);
+        for (PenjualanSementara penjualanSementara : penjualanSementaras) {
+
+            BigDecimal totalHargaBarang = penjualanSementara.getHargaSatuanBarang().multiply(BigDecimal.valueOf(penjualanSementara.getJumlahBarang().doubleValue()));
+            totalHarga = totalHarga.add(totalHargaBarang);
+
+            Barang barang = App.barangService().getBarang(penjualanSementara.getIdBarang());
+            barang.setJumlahBarang(barang.getJumlahBarang() - penjualanSementara.getJumlahBarang());
+            App.barangService().editBarang(barang);
+
+            PenjualanDetail penjualanDetail = new PenjualanDetail();
+            penjualanDetail.setJumlahBarang(penjualanSementara.getJumlahBarang());
+            penjualanDetail.setTotalHargaPerBarang(totalHargaBarang);
+
+            penjualanDetail.setBarang(barang);
+            penjualanDetail.setPenjualan(penjualan);
+
+            penjualanDetails.add(penjualanDetail);
+
+        }
+
+        penjualan.setTanggalTransaksi(this.penjualanSimpanView.getTanggalPenjualan().getDate());
+        penjualan.setNamaPembeli(this.penjualanSimpanView.getNamaPembeli().getText());
+        penjualan.setTotalHarga(totalHarga);
+        penjualan.setPenjualanDetails(penjualanDetails);
+
+        App.penjualanService().simpanPenjualan(penjualan);
+
+        JOptionPane.showMessageDialog(null, "Data Penjualan Tersimpan", "Info", JOptionPane.INFORMATION_MESSAGE);
+        ambilDataBarang();
+        penjualanSementaras.clear();
+        tampilPenjualanSementara();
     }
 
 }
