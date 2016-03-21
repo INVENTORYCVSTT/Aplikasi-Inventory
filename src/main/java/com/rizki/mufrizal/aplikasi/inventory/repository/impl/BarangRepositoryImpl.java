@@ -53,4 +53,9 @@ public class BarangRepositoryImpl implements BarangRepository {
                 .list();
     }
 
+    @Override
+    public Barang getBarang(String idBarang) {
+        return sessionFactory.getCurrentSession().get(Barang.class, idBarang);
+    }
+
 }
