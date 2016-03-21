@@ -114,7 +114,9 @@ public class BarangController {
             this.barangView.getJenisBarang().setSelectedItem(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 3)));
             java.util.Date tanggal = new SimpleDateFormat("yyyy-MM-d").parse(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 4)));
             this.barangView.getTanggalKadaluarsa().setDate(tanggal);
-            this.barangView.getHargaSatuan().setText(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 5)));
+
+            String hargaSatuanBarang = this.barangView.getTabelBarang().getValueAt(index, 5).toString();
+            this.barangView.getHargaSatuan().setText(hargaSatuanBarang.split(" ")[1]);
             this.barangView.getJumlahBarang().setText(String.valueOf(this.barangView.getTabelBarang().getValueAt(index, 6)));
         } catch (ParseException ex) {
             LOGGER.error("error di : {}", ex);
