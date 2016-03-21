@@ -15,6 +15,7 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -140,9 +141,12 @@ public class PenjualanController {
             penjualanSementara.setIdBarang(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 1)));
             penjualanSementara.setNamaBarang(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 2)));
             penjualanSementara.setJenisBarang(JenisBarang.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 3).toString()));
+
             java.util.Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 4)));
             penjualanSementara.setTanggalKadaluarsa(tanggal);
-            penjualanSementara.setHargaSatuanBarang(BigDecimal.valueOf(Double.parseDouble(this.penjualanSimpanView.getTabelBarang().getValueAt(index, 5).toString())));
+
+            String hargaSatuanBarang = this.penjualanSimpanView.getTabelBarang().getValueAt(index, 5).toString();
+            penjualanSementara.setHargaSatuanBarang(BigDecimal.valueOf(Double.parseDouble(hargaSatuanBarang.split(" ")[1])));
 
             PenjualanSementara ps = checkContains(penjualanSementara, penjualanSementaras);
 
