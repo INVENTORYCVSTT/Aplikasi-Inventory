@@ -62,7 +62,7 @@ public class BarangAbstractTableModel extends AbstractTableModel {
             case 4:
                 return barang.getTanggalKadaluarsa();
             case 5:
-                return barang.getHargaSatuanBarang();
+                return "Rp " + barang.getHargaSatuanBarang();
             case 6:
                 return barang.getJumlahBarang();
             default:
