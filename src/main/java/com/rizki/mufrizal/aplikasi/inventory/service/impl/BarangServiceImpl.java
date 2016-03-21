@@ -53,4 +53,9 @@ public class BarangServiceImpl implements BarangService {
         return barangRepository.ambilBarangs(pageNumber, rowsPerPage);
     }
 
+    @Override
+    public Barang getBarang(String idBarang) {
+        return barangRepository.getBarang(idBarang);
+    }
+
 }
