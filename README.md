@@ -15,3 +15,16 @@ Teknologi yang digunakan :
 8. JBCrypt
 9. Jcalendar
 10. Slf4j
+
+Fitur Aplikasi :
+
+1. Input data barang
+2. Input Data Penjualan
+3. Input Data Pembelian
+4. Report Data Penjualan
+5. Audit Data Penjualan Dan Pembelian
+
+Fitur Yang Telah Selesai :
+
+1. Input data barang
+2. Input Data Penjualan
