@@ -1,6 +1,7 @@
 package com.rizki.mufrizal.aplikasi.inventory.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
@@ -40,6 +41,9 @@ public class PenjualanDetail implements Serializable {
     @Column(name = "jumlah_barang")
     private Integer jumlahBarang;
 
+    @Column(name = "total_harga_per_barang")
+    private BigDecimal totalHargaPerBarang;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "kodeTransaksiPenjualan", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Penjualan penjualan;
@@ -77,6 +81,20 @@ public class PenjualanDetail implements Serializable {
     }
 
     /**
+     * @return the totalHargaPerBarang
+     */
+    public BigDecimal getTotalHargaPerBarang() {
+        return totalHargaPerBarang;
+    }
+
+    /**
+     * @param totalHargaPerBarang the totalHargaPerBarang to set
+     */
+    public void setTotalHargaPerBarang(BigDecimal totalHargaPerBarang) {
+        this.totalHargaPerBarang = totalHargaPerBarang;
+    }
+
+    /**
      * @return the penjualan
      */
     public Penjualan getPenjualan() {
@@ -103,4 +121,5 @@ public class PenjualanDetail implements Serializable {
     public void setBarang(Barang barang) {
         this.barang = barang;
     }
+
 }
