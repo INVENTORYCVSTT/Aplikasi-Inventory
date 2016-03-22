@@ -306,7 +306,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
-        penjualanController.refresh();
+        penjualanController.refreshBarang();
     }//GEN-LAST:event_refreshActionPerformed
 
     private void lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastActionPerformed
