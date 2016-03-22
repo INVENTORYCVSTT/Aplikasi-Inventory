@@ -133,59 +133,83 @@ public class BarangController {
     }
 
     public void simpanBarang() {
-        Barang barang = new Barang();
-        barang.setNamaBarang(this.barangView.getNamaBarang().getText());
-        barang.setJenisBarang(JenisBarang.valueOf(this.barangView.getJenisBarang().getSelectedItem().toString()));
-        barang.setTanggalKadaluarsa(this.barangView.getTanggalKadaluarsa().getDate());
-        barang.setHargaSatuanBarang(BigDecimal.valueOf(Long.parseLong(this.barangView.getHargaSatuan().getText())));
-        barang.setJumlahBarang(Integer.parseInt(this.barangView.getJumlahBarang().getText()));
+        if (this.barangView.getNamaBarang().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama barang belum diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (this.barangView.getTanggalKadaluarsa().getDate() == null) {
+            JOptionPane.showMessageDialog(null, "tanggal belum dipilih", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (this.barangView.getHargaSatuan().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Harga satuan barang belum diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (this.barangView.getJumlahBarang().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Jumlah barang belum diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Barang barang = new Barang();
+            barang.setNamaBarang(this.barangView.getNamaBarang().getText());
+            barang.setJenisBarang(JenisBarang.valueOf(this.barangView.getJenisBarang().getSelectedItem().toString()));
+            barang.setTanggalKadaluarsa(this.barangView.getTanggalKadaluarsa().getDate());
+            barang.setHargaSatuanBarang(BigDecimal.valueOf(Long.parseLong(this.barangView.getHargaSatuan().getText())));
+            barang.setJumlahBarang(Integer.parseInt(this.barangView.getJumlahBarang().getText()));
 
-        App.barangService().simpanBarang(barang);
+            App.barangService().simpanBarang(barang);
 
-        LOGGER.debug("prosess simpan barang : {}", barang);
+            LOGGER.debug("prosess simpan barang : {}", barang);
 
-        JOptionPane.showMessageDialog(null, "Data barang berhasil disimpan", "Info", JOptionPane.INFORMATION_MESSAGE);
-        ambilDataBarang();
-        clear();
+            JOptionPane.showMessageDialog(null, "Data barang berhasil disimpan", "Info", JOptionPane.INFORMATION_MESSAGE);
+            ambilDataBarang();
+            clear();
+        }
     }
 
     public void editBarang() {
-        Barang barang = new Barang();
-        barang.setIdBarang(this.barangView.getIdBarang().getText());
-        barang.setNamaBarang(this.barangView.getNamaBarang().getText());
-        barang.setJenisBarang(JenisBarang.valueOf(this.barangView.getJenisBarang().getSelectedItem().toString()));
-        barang.setTanggalKadaluarsa(this.barangView.getTanggalKadaluarsa().getDate());
-        barang.setHargaSatuanBarang(BigDecimal.valueOf(Double.valueOf(this.barangView.getHargaSatuan().getText())));
-        barang.setJumlahBarang(Integer.parseInt(this.barangView.getJumlahBarang().getText()));
+        if (this.barangView.getNamaBarang().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama barang belum diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (this.barangView.getTanggalKadaluarsa().getDate() == null) {
+            JOptionPane.showMessageDialog(null, "tanggal belum dipilih", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (this.barangView.getHargaSatuan().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Harga satuan barang belum diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (this.barangView.getJumlahBarang().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Jumlah barang belum diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Barang barang = new Barang();
+            barang.setIdBarang(this.barangView.getIdBarang().getText());
+            barang.setNamaBarang(this.barangView.getNamaBarang().getText());
+            barang.setJenisBarang(JenisBarang.valueOf(this.barangView.getJenisBarang().getSelectedItem().toString()));
+            barang.setTanggalKadaluarsa(this.barangView.getTanggalKadaluarsa().getDate());
+            barang.setHargaSatuanBarang(BigDecimal.valueOf(Double.valueOf(this.barangView.getHargaSatuan().getText())));
+            barang.setJumlahBarang(Integer.parseInt(this.barangView.getJumlahBarang().getText()));
 
-        App.barangService().editBarang(barang);
+            App.barangService().editBarang(barang);
 
-        LOGGER.debug("prosess edit barang : {}", barang);
+            LOGGER.debug("prosess edit barang : {}", barang);
 
-        JOptionPane.showMessageDialog(null, "Data barang berhasil diedit", "Info", JOptionPane.INFORMATION_MESSAGE);
-        ambilDataBarang();
-        clear();
+            JOptionPane.showMessageDialog(null, "Data barang berhasil diedit", "Info", JOptionPane.INFORMATION_MESSAGE);
+            ambilDataBarang();
+            clear();
+        }
     }
 
     public void hapusBarang() {
-        Barang barang = new Barang();
-        barang.setIdBarang(this.barangView.getIdBarang().getText());
-        barang.setNamaBarang(this.barangView.getNamaBarang().getText());
-        barang.setJenisBarang(JenisBarang.valueOf(this.barangView.getJenisBarang().getSelectedItem().toString()));
-        barang.setTanggalKadaluarsa(this.barangView.getTanggalKadaluarsa().getDate());
-        barang.setHargaSatuanBarang(BigDecimal.valueOf(Double.valueOf(this.barangView.getHargaSatuan().getText())));
-        barang.setJumlahBarang(Integer.parseInt(this.barangView.getJumlahBarang().getText()));
+        if (this.barangView.getIdBarang().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Data Barang belum dipilih", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Barang barang = new Barang();
+            barang.setIdBarang(this.barangView.getIdBarang().getText());
+            barang.setNamaBarang(this.barangView.getNamaBarang().getText());
+            barang.setJenisBarang(JenisBarang.valueOf(this.barangView.getJenisBarang().getSelectedItem().toString()));
+            barang.setTanggalKadaluarsa(this.barangView.getTanggalKadaluarsa().getDate());
+            barang.setHargaSatuanBarang(BigDecimal.valueOf(Double.valueOf(this.barangView.getHargaSatuan().getText())));
+            barang.setJumlahBarang(Integer.parseInt(this.barangView.getJumlahBarang().getText()));
 
-        int pilih = JOptionPane.showConfirmDialog(null, "Apakah data ingin dihapus ?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            int pilih = JOptionPane.showConfirmDialog(null, "Apakah data ingin dihapus ?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-        if (pilih == JOptionPane.YES_OPTION) {
+            if (pilih == JOptionPane.YES_OPTION) {
 
-            App.barangService().hapusBarang(barang);
-            LOGGER.debug("prosess hapus barang : {}", barang);
+                App.barangService().hapusBarang(barang);
+                LOGGER.debug("prosess hapus barang : {}", barang);
 
-            JOptionPane.showMessageDialog(null, "Data barang berhasil dihapus", "Info", JOptionPane.INFORMATION_MESSAGE);
-            ambilDataBarang();
-            clear();
+                JOptionPane.showMessageDialog(null, "Data barang berhasil dihapus", "Info", JOptionPane.INFORMATION_MESSAGE);
+                ambilDataBarang();
+                clear();
+            }
         }
     }
 }
