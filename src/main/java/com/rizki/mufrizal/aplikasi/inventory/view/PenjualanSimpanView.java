@@ -310,19 +310,19 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_refreshActionPerformed
 
     private void lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastActionPerformed
-        penjualanController.lastPaging();
+        penjualanController.lastPagingBarang();
     }//GEN-LAST:event_lastActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        penjualanController.nextPaging();
+        penjualanController.nextPagingBarang();
     }//GEN-LAST:event_nextActionPerformed
 
     private void previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousActionPerformed
-        penjualanController.PreviousPaging();
+        penjualanController.PreviousPagingBarang();
     }//GEN-LAST:event_previousActionPerformed
 
     private void firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstActionPerformed
-        penjualanController.firstPaging();
+        penjualanController.firstPagingBarang();
     }//GEN-LAST:event_firstActionPerformed
 
     private void tabelBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelBarangMouseClicked
