@@ -17,10 +17,8 @@ public interface PenjualanRepository {
 
     public void simpanPenjualan(Penjualan penjualan);
 
-    public void editPenjualan(Penjualan penjualan);
+    public Integer jumlahPenjualan();
 
-    public void hapusPenjualan(Penjualan penjualan);
-
-    public List<Penjualan> ambilPenjualans();
+    public List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage);
 
 }
