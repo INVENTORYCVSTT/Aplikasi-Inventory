@@ -1,38 +1,26 @@
 package com.rizki.mufrizal.aplikasi.inventory;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 /**
- * Unit test for simple App.
+ *
+ * @Author Rizki Mufrizal <mufrizalrizki@gmail.com>
+ * @Since Mar 21, 2016
+ * @Time 11:03:02 PM
+ * @Encoding UTF-8
+ * @Project Aplikasi-Inventory
+ * @Package com.rizki.mufrizal.aplikasi.inventory
+ *
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/ApplicationTestRepositoryContext.xml"})
+@TestExecutionListeners({
+    DependencyInjectionTestExecutionListener.class
+})
+public class AppTest {
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
 }
