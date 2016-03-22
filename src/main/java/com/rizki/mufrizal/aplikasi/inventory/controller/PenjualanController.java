@@ -15,7 +15,6 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -176,40 +175,46 @@ public class PenjualanController {
     }
 
     public void simpanTransaksi() {
-        Penjualan penjualan = new Penjualan();
-        List<PenjualanDetail> penjualanDetails = new ArrayList<>();
-        BigDecimal totalHarga = new BigDecimal(BigInteger.ZERO);
-        for (PenjualanSementara penjualanSementara : penjualanSementaras) {
+        if (this.penjualanSimpanView.getTanggalPenjualan().getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Tanggal Penjualan belum dipilih", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (this.penjualanSimpanView.getNamaPembeli().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama Pembeli belum diisi", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Penjualan penjualan = new Penjualan();
+            List<PenjualanDetail> penjualanDetails = new ArrayList<>();
+            BigDecimal totalHarga = new BigDecimal(BigInteger.ZERO);
+            for (PenjualanSementara penjualanSementara : penjualanSementaras) {
 
-            BigDecimal totalHargaBarang = penjualanSementara.getHargaSatuanBarang().multiply(BigDecimal.valueOf(penjualanSementara.getJumlahBarang().doubleValue()));
-            totalHarga = totalHarga.add(totalHargaBarang);
+                BigDecimal totalHargaBarang = penjualanSementara.getHargaSatuanBarang().multiply(BigDecimal.valueOf(penjualanSementara.getJumlahBarang().doubleValue()));
+                totalHarga = totalHarga.add(totalHargaBarang);
 
-            Barang barang = App.barangService().getBarang(penjualanSementara.getIdBarang());
-            barang.setJumlahBarang(barang.getJumlahBarang() - penjualanSementara.getJumlahBarang());
-            App.barangService().editBarang(barang);
+                Barang barang = App.barangService().getBarang(penjualanSementara.getIdBarang());
+                barang.setJumlahBarang(barang.getJumlahBarang() - penjualanSementara.getJumlahBarang());
+                App.barangService().editBarang(barang);
 
-            PenjualanDetail penjualanDetail = new PenjualanDetail();
-            penjualanDetail.setJumlahBarang(penjualanSementara.getJumlahBarang());
-            penjualanDetail.setTotalHargaPerBarang(totalHargaBarang);
+                PenjualanDetail penjualanDetail = new PenjualanDetail();
+                penjualanDetail.setJumlahBarang(penjualanSementara.getJumlahBarang());
+                penjualanDetail.setTotalHargaPerBarang(totalHargaBarang);
 
-            penjualanDetail.setBarang(barang);
-            penjualanDetail.setPenjualan(penjualan);
+                penjualanDetail.setBarang(barang);
+                penjualanDetail.setPenjualan(penjualan);
 
-            penjualanDetails.add(penjualanDetail);
+                penjualanDetails.add(penjualanDetail);
 
+            }
+
+            penjualan.setTanggalTransaksi(this.penjualanSimpanView.getTanggalPenjualan().getDate());
+            penjualan.setNamaPembeli(this.penjualanSimpanView.getNamaPembeli().getText());
+            penjualan.setTotalHarga(totalHarga);
+            penjualan.setPenjualanDetails(penjualanDetails);
+
+            App.penjualanService().simpanPenjualan(penjualan);
+
+            JOptionPane.showMessageDialog(null, "Data Penjualan Tersimpan", "Info", JOptionPane.INFORMATION_MESSAGE);
+            ambilDataBarang();
+            penjualanSementaras.clear();
+            tampilPenjualanSementara();
         }
-
-        penjualan.setTanggalTransaksi(this.penjualanSimpanView.getTanggalPenjualan().getDate());
-        penjualan.setNamaPembeli(this.penjualanSimpanView.getNamaPembeli().getText());
-        penjualan.setTotalHarga(totalHarga);
-        penjualan.setPenjualanDetails(penjualanDetails);
-
-        App.penjualanService().simpanPenjualan(penjualan);
-
-        JOptionPane.showMessageDialog(null, "Data Penjualan Tersimpan", "Info", JOptionPane.INFORMATION_MESSAGE);
-        ambilDataBarang();
-        penjualanSementaras.clear();
-        tampilPenjualanSementara();
     }
 
 }
