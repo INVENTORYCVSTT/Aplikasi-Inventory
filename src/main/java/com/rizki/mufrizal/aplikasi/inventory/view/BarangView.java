@@ -28,6 +28,7 @@ public class BarangView extends javax.swing.JInternalFrame {
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((dimension.width / 2) - (getSize().width / 2), (dimension.height / 2) - (getSize().height / 2));
         barangController.ambilDataBarang();
+        barangController.disableComponent();
     }
 
     @SuppressWarnings("unchecked")
@@ -55,6 +56,7 @@ public class BarangView extends javax.swing.JInternalFrame {
         update = new javax.swing.JButton();
         simpan = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         first = new javax.swing.JButton();
         previous = new javax.swing.JButton();
@@ -111,12 +113,22 @@ public class BarangView extends javax.swing.JInternalFrame {
         tambah.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tambah.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         tambah.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tambah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tambahMouseClicked(evt);
+            }
+        });
 
         edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
         edit.setText("Edit");
         edit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         edit.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         edit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editMouseClicked(evt);
+            }
+        });
 
         update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
         update.setText("Update");
@@ -151,12 +163,22 @@ public class BarangView extends javax.swing.JInternalFrame {
             }
         });
 
+        cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.png"))); // NOI18N
+        cancel.setText("Cancel");
+        cancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cancel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        cancel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(tambah)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(simpan)
@@ -165,16 +187,22 @@ public class BarangView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(update)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hapus))
+                .addComponent(hapus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancel))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(tambah)
-                .addComponent(edit)
-                .addComponent(update)
-                .addComponent(simpan)
-                .addComponent(hapus))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tambah)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(edit)
+                        .addComponent(update)
+                        .addComponent(simpan)
+                        .addComponent(hapus))
+                    .addComponent(cancel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -287,8 +315,7 @@ public class BarangView extends javax.swing.JInternalFrame {
                             .addComponent(namaBarang)
                             .addComponent(jenisBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tanggalKadaluarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hargaSatuan, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(hargaSatuan, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -325,12 +352,12 @@ public class BarangView extends javax.swing.JInternalFrame {
                     .addComponent(jumlahBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -372,8 +399,22 @@ public class BarangView extends javax.swing.JInternalFrame {
         barangController.tampilkanBarang();
     }//GEN-LAST:event_tabelBarangMouseClicked
 
+    private void tambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tambahMouseClicked
+        barangController.disableAdd();
+        barangController.clear();
+    }//GEN-LAST:event_tambahMouseClicked
+
+    private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
+        barangController.disableEdit();
+    }//GEN-LAST:event_editMouseClicked
+
+    private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
+        barangController.disableComponent();
+    }//GEN-LAST:event_cancelMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancel;
     private javax.swing.JButton edit;
     private javax.swing.JButton first;
     private javax.swing.JButton hapus;
@@ -502,5 +543,47 @@ public class BarangView extends javax.swing.JInternalFrame {
      */
     public javax.swing.JLabel getIdBarang() {
         return idBarang;
+    }
+
+    /**
+     * @return the cancel
+     */
+    public javax.swing.JButton getCancel() {
+        return cancel;
+    }
+
+    /**
+     * @return the edit
+     */
+    public javax.swing.JButton getEdit() {
+        return edit;
+    }
+
+    /**
+     * @return the hapus
+     */
+    public javax.swing.JButton getHapus() {
+        return hapus;
+    }
+
+    /**
+     * @return the tambah
+     */
+    public javax.swing.JButton getTambah() {
+        return tambah;
+    }
+
+    /**
+     * @return the update
+     */
+    public javax.swing.JButton getUpdate() {
+        return update;
+    }
+
+    /**
+     * @return the simpan
+     */
+    public javax.swing.JButton getSimpan() {
+        return simpan;
     }
 }
