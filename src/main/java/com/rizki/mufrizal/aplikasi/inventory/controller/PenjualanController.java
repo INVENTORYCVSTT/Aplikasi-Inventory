@@ -82,13 +82,13 @@ public class PenjualanController {
         LOGGER.info("Paging : {}", pageNumber);
     }
 
-    public void firstPaging() {
+    public void firstPagingBarang() {
         pageNumber = 1;
         ambilDataBarang();
         LOGGER.info("Paging awal : {}", pageNumber);
     }
 
-    public void PreviousPaging() {
+    public void PreviousPagingBarang() {
         if (pageNumber > 1) {
             pageNumber -= 1;
             ambilDataBarang();
@@ -96,7 +96,7 @@ public class PenjualanController {
         }
     }
 
-    public void nextPaging() {
+    public void nextPagingBarang() {
         if (pageNumber < totalPage) {
             pageNumber += 1;
             ambilDataBarang();
@@ -104,7 +104,7 @@ public class PenjualanController {
         }
     }
 
-    public void lastPaging() {
+    public void lastPagingBarang() {
         pageNumber = totalPage;
         ambilDataBarang();
         LOGGER.info("Paging akhir : {}", pageNumber);
