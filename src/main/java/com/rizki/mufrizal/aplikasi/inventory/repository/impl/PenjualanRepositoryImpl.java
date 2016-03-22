@@ -29,18 +29,19 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
     }
 
     @Override
-    public void editPenjualan(Penjualan penjualan) {
-        sessionFactory.getCurrentSession().update(penjualan);
+    public Integer jumlahPenjualan() {
+        return sessionFactory.getCurrentSession().createCriteria(Penjualan.class).list().size();
     }
 
     @Override
-    public void hapusPenjualan(Penjualan penjualan) {
-        sessionFactory.getCurrentSession().delete(penjualan);
-    }
-
-    @Override
-    public List<Penjualan> ambilPenjualans() {
-        return sessionFactory.getCurrentSession().createCriteria(Penjualan.class).list();
+    public List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage) {
+        return sessionFactory
+                .getCurrentSession()
+                .createCriteria(Penjualan.class)
+                .setFirstResult(rowsPerPage * (pageNumber - 1))
+                .setMaxResults(rowsPerPage)
+                .setCacheable(Boolean.TRUE)
+                .list();
     }
 
 }
