@@ -31,21 +31,14 @@ public class PenjualanServiceImpl implements PenjualanService {
         penjualanRepository.simpanPenjualan(penjualan);
     }
 
-    @Transactional
     @Override
-    public void editPenjualan(Penjualan penjualan) {
-        penjualanRepository.editPenjualan(penjualan);
-    }
-
-    @Transactional
-    @Override
-    public void hapusPenjualan(Penjualan penjualan) {
-        penjualanRepository.hapusPenjualan(penjualan);
+    public Integer jumlahPenjualan() {
+        return penjualanRepository.jumlahPenjualan();
     }
 
     @Override
-    public List<Penjualan> ambilPenjualans() {
-        return penjualanRepository.ambilPenjualans();
+    public List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage) {
+        return penjualanRepository.ambilPenjualans(pageNumber, rowsPerPage);
     }
 
 }
