@@ -2,6 +2,7 @@ package com.rizki.mufrizal.aplikasi.inventory.controller;
 
 import com.rizki.mufrizal.aplikasi.inventory.App;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.BarangAbstractTableModel;
+import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PenjualanAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PenjualanSementaraAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.TableAutoResizeColumn;
 import com.rizki.mufrizal.aplikasi.inventory.domain.Barang;
@@ -10,6 +11,7 @@ import com.rizki.mufrizal.aplikasi.inventory.domain.Penjualan;
 import com.rizki.mufrizal.aplikasi.inventory.domain.PenjualanDetail;
 import com.rizki.mufrizal.aplikasi.inventory.domain.PenjualanSementara;
 import com.rizki.mufrizal.aplikasi.inventory.view.PenjualanSimpanView;
+import com.rizki.mufrizal.aplikasi.inventory.view.PenjualanView;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
@@ -33,10 +35,13 @@ import org.slf4j.LoggerFactory;
  */
 public class PenjualanController {
 
-    private final PenjualanSimpanView penjualanSimpanView;
+    private PenjualanSimpanView penjualanSimpanView;
+    private PenjualanView penjualanView;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(PenjualanController.class);
     private BarangAbstractTableModel barangAbstractTableModel;
     private PenjualanSementaraAbstractTableModel penjualanSementaraAbstractTableModel;
+    private PenjualanAbstractTableModel penjualanAbstractTableModel;
     private final TableAutoResizeColumn tableAutoResizeColumn = new TableAutoResizeColumn();
 
     private final List<PenjualanSementara> penjualanSementaras = new ArrayList<>();
@@ -45,20 +50,24 @@ public class PenjualanController {
         this.penjualanSimpanView = penjualanSimpanView;
     }
 
-    //paging
-    private Integer totalRows = 0;
-    private Integer pageNumber = 1;
-    private Integer totalPage = 1;
-    private Integer rowsPerPage = 10;
+    public PenjualanController(PenjualanView penjualanView) {
+        this.penjualanView = penjualanView;
+    }
+
+    //paging barang
+    private Integer totalRowsBarang = 0;
+    private Integer pageNumberBarang = 1;
+    private Integer totalPageBarang = 1;
+    private Integer rowsPerPageBarang = 10;
 
     public void ambilDataBarang() {
         LOGGER.info("Ambil data barang");
-        rowsPerPage = Integer.valueOf(this.penjualanSimpanView.getPerPage().getSelectedItem().toString());
-        totalRows = App.barangService().jumlahBarang();
-        Double dbTotalPage = Math.ceil(totalRows.doubleValue() / rowsPerPage.doubleValue());
-        totalPage = dbTotalPage.intValue();
+        rowsPerPageBarang = Integer.valueOf(this.penjualanSimpanView.getPerPage().getSelectedItem().toString());
+        totalRowsBarang = App.barangService().jumlahBarang();
+        Double dbTotalPage = Math.ceil(totalRowsBarang.doubleValue() / rowsPerPageBarang.doubleValue());
+        totalPageBarang = dbTotalPage.intValue();
 
-        if (pageNumber == 1) {
+        if (pageNumberBarang == 1) {
             this.penjualanSimpanView.getFirst().setEnabled(Boolean.FALSE);
             this.penjualanSimpanView.getPrevious().setEnabled(Boolean.FALSE);
         } else {
@@ -66,7 +75,7 @@ public class PenjualanController {
             this.penjualanSimpanView.getPrevious().setEnabled(Boolean.TRUE);
         }
 
-        if (pageNumber.equals(totalPage)) {
+        if (pageNumberBarang.equals(totalPageBarang)) {
             this.penjualanSimpanView.getNext().setEnabled(Boolean.FALSE);
             this.penjualanSimpanView.getLast().setEnabled(Boolean.FALSE);
         } else {
@@ -74,47 +83,47 @@ public class PenjualanController {
             this.penjualanSimpanView.getLast().setEnabled(Boolean.TRUE);
         }
 
-        this.penjualanSimpanView.getLabelPaging().setText("Page " + pageNumber + " of " + totalPage);
+        this.penjualanSimpanView.getLabelPaging().setText("Page " + pageNumberBarang + " of " + totalPageBarang);
 
-        barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().ambilBarangs(pageNumber, rowsPerPage));
+        barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().ambilBarangs(pageNumberBarang, rowsPerPageBarang));
         this.penjualanSimpanView.getTabelBarang().setModel(barangAbstractTableModel);
         tableAutoResizeColumn.autoResizeColumn(this.penjualanSimpanView.getTabelBarang());
-        LOGGER.info("Paging : {}", pageNumber);
+        LOGGER.info("Paging : {}", pageNumberBarang);
     }
 
     public void firstPagingBarang() {
-        pageNumber = 1;
+        pageNumberBarang = 1;
         ambilDataBarang();
-        LOGGER.info("Paging awal : {}", pageNumber);
+        LOGGER.info("Paging awal : {}", pageNumberBarang);
     }
 
     public void PreviousPagingBarang() {
-        if (pageNumber > 1) {
-            pageNumber -= 1;
+        if (pageNumberBarang > 1) {
+            pageNumberBarang -= 1;
             ambilDataBarang();
-            LOGGER.info("Paging sebelum : {}", pageNumber);
+            LOGGER.info("Paging sebelum : {}", pageNumberBarang);
         }
     }
 
     public void nextPagingBarang() {
-        if (pageNumber < totalPage) {
-            pageNumber += 1;
+        if (pageNumberBarang < totalPageBarang) {
+            pageNumberBarang += 1;
             ambilDataBarang();
-            LOGGER.info("Paging selanjutnya : {}", pageNumber);
+            LOGGER.info("Paging selanjutnya : {}", pageNumberBarang);
         }
     }
 
     public void lastPagingBarang() {
-        pageNumber = totalPage;
+        pageNumberBarang = totalPageBarang;
         ambilDataBarang();
-        LOGGER.info("Paging akhir : {}", pageNumber);
+        LOGGER.info("Paging akhir : {}", pageNumberBarang);
     }
 
-    public void refresh() {
+    public void refreshBarang() {
         ambilDataBarang();
-        LOGGER.info("refresh paging : {}", pageNumber);
+        LOGGER.info("refresh paging : {}", pageNumberBarang);
     }
-    //end paging
+    //end paging barang
 
     private PenjualanSementara checkContains(PenjualanSementara penjualanSementara1, List<PenjualanSementara> penjualanSementaras1) {
         Iterator<PenjualanSementara> iterator = penjualanSementaras1.iterator();
@@ -217,4 +226,80 @@ public class PenjualanController {
         }
     }
 
+    //penjualan
+    //paging penjualan
+    private Integer totalRowsPenjualan = 0;
+    private Integer pageNumberPenjualan = 1;
+    private Integer totalPagePenjualan = 1;
+    private Integer rowsPerPagePenjualan = 10;
+
+    public void ambilDataPenjualan() {
+        LOGGER.info("Ambil data Penjualan");
+        rowsPerPagePenjualan = Integer.valueOf(this.penjualanView.getPerPage().getSelectedItem().toString());
+        totalRowsPenjualan = App.penjualanService().jumlahPenjualan();
+        Double dbTotalPage = Math.ceil(totalRowsPenjualan.doubleValue() / rowsPerPagePenjualan.doubleValue());
+        totalPagePenjualan = dbTotalPage.intValue();
+
+        if (pageNumberPenjualan == 1) {
+            this.penjualanView.getFirst().setEnabled(Boolean.FALSE);
+            this.penjualanView.getPrevious().setEnabled(Boolean.FALSE);
+        } else {
+            this.penjualanView.getFirst().setEnabled(Boolean.TRUE);
+            this.penjualanView.getPrevious().setEnabled(Boolean.TRUE);
+        }
+
+        if (pageNumberPenjualan.equals(totalPagePenjualan)) {
+            this.penjualanView.getNext().setEnabled(Boolean.FALSE);
+            this.penjualanView.getLast().setEnabled(Boolean.FALSE);
+        } else {
+            this.penjualanView.getNext().setEnabled(Boolean.TRUE);
+            this.penjualanView.getLast().setEnabled(Boolean.TRUE);
+        }
+
+        this.penjualanView.getLabelPaging().setText("Page " + pageNumberPenjualan + " of " + totalPagePenjualan);
+        this.penjualanView.getLabelTotalRecord().setText("Total Record " + totalRowsPenjualan);
+
+        penjualanAbstractTableModel = new PenjualanAbstractTableModel(App.penjualanService().ambilPenjualans(pageNumberPenjualan, rowsPerPagePenjualan));
+        this.penjualanView.getTabelPenjualan().setModel(penjualanAbstractTableModel);
+        tableAutoResizeColumn.autoResizeColumn(this.penjualanView.getTabelPenjualan());
+        LOGGER.info("Paging : {}", pageNumberPenjualan);
+    }
+
+    public void firstPagingPenjualan() {
+        pageNumberPenjualan = 1;
+        ambilDataPenjualan();
+        LOGGER.info("Paging awal : {}", pageNumberPenjualan);
+    }
+
+    public void PreviousPagingPenjualan() {
+        if (pageNumberPenjualan > 1) {
+            pageNumberPenjualan -= 1;
+            ambilDataPenjualan();
+            LOGGER.info("Paging sebelum : {}", pageNumberPenjualan);
+        }
+    }
+
+    public void nextPagingPenjualan() {
+        if (pageNumberPenjualan < totalPagePenjualan) {
+            pageNumberPenjualan += 1;
+            ambilDataPenjualan();
+            LOGGER.info("Paging selanjutnya : {}", pageNumberPenjualan);
+        }
+    }
+
+    public void lastPagingPenjualan() {
+        pageNumberPenjualan = totalPagePenjualan;
+        ambilDataPenjualan();
+        LOGGER.info("Paging akhir : {}", pageNumberPenjualan);
+    }
+
+    public void refreshPenjualan() {
+        ambilDataPenjualan();
+        LOGGER.info("refresh paging : {}", pageNumberPenjualan);
+    }
+    //end paging penjualan
+
+    //end penjualan
+    //penjualan detail
+    //end penjualan detail
 }
