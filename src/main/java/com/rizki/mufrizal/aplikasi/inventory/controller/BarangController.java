@@ -156,6 +156,7 @@ public class BarangController {
             JOptionPane.showMessageDialog(null, "Data barang berhasil disimpan", "Info", JOptionPane.INFORMATION_MESSAGE);
             ambilDataBarang();
             clear();
+            disableComponent();
         }
     }
 
@@ -184,6 +185,7 @@ public class BarangController {
             JOptionPane.showMessageDialog(null, "Data barang berhasil diedit", "Info", JOptionPane.INFORMATION_MESSAGE);
             ambilDataBarang();
             clear();
+            disableComponent();
         }
     }
 
@@ -212,4 +214,51 @@ public class BarangController {
             }
         }
     }
+
+    //disable or enable
+    public void disableComponent() {
+        this.barangView.getTambah().setEnabled(Boolean.TRUE);
+        this.barangView.getHapus().setEnabled(Boolean.TRUE);
+        this.barangView.getEdit().setEnabled(Boolean.TRUE);
+
+        this.barangView.getNamaBarang().setEnabled(Boolean.FALSE);
+        this.barangView.getJenisBarang().setEnabled(Boolean.FALSE);
+        this.barangView.getTanggalKadaluarsa().setEnabled(Boolean.FALSE);
+        this.barangView.getHargaSatuan().setEnabled(Boolean.FALSE);
+        this.barangView.getJumlahBarang().setEnabled(Boolean.FALSE);
+        this.barangView.getSimpan().setEnabled(Boolean.FALSE);
+        this.barangView.getUpdate().setEnabled(Boolean.FALSE);
+        this.barangView.getCancel().setEnabled(Boolean.FALSE);
+    }
+
+    public void disableAdd() {
+        this.barangView.getSimpan().setEnabled(Boolean.TRUE);
+        this.barangView.getNamaBarang().setEnabled(Boolean.TRUE);
+        this.barangView.getJenisBarang().setEnabled(Boolean.TRUE);
+        this.barangView.getTanggalKadaluarsa().setEnabled(Boolean.TRUE);
+        this.barangView.getHargaSatuan().setEnabled(Boolean.TRUE);
+        this.barangView.getJumlahBarang().setEnabled(Boolean.TRUE);
+        this.barangView.getCancel().setEnabled(Boolean.TRUE);
+
+        this.barangView.getTambah().setEnabled(Boolean.FALSE);
+        this.barangView.getUpdate().setEnabled(Boolean.FALSE);
+        this.barangView.getHapus().setEnabled(Boolean.FALSE);
+        this.barangView.getEdit().setEnabled(Boolean.FALSE);
+    }
+
+    public void disableEdit() {
+        this.barangView.getUpdate().setEnabled(Boolean.TRUE);
+        this.barangView.getNamaBarang().setEnabled(Boolean.TRUE);
+        this.barangView.getJenisBarang().setEnabled(Boolean.TRUE);
+        this.barangView.getTanggalKadaluarsa().setEnabled(Boolean.TRUE);
+        this.barangView.getHargaSatuan().setEnabled(Boolean.TRUE);
+        this.barangView.getJumlahBarang().setEnabled(Boolean.TRUE);
+        this.barangView.getCancel().setEnabled(Boolean.TRUE);
+
+        this.barangView.getTambah().setEnabled(Boolean.FALSE);
+        this.barangView.getSimpan().setEnabled(Boolean.FALSE);
+        this.barangView.getHapus().setEnabled(Boolean.FALSE);
+        this.barangView.getEdit().setEnabled(Boolean.FALSE);
+    }
+    //end disable or enable
 }
