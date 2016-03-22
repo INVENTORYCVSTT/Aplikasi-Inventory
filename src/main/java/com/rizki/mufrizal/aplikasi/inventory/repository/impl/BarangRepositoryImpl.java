@@ -50,6 +50,7 @@ public class BarangRepositoryImpl implements BarangRepository {
                 .createCriteria(Barang.class)
                 .setFirstResult(rowsPerPage * (pageNumber - 1))
                 .setMaxResults(rowsPerPage)
+                .setCacheable(Boolean.TRUE)
                 .list();
     }
 
