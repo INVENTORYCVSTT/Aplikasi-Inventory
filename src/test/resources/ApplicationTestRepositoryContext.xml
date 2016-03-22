@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+@Author Rizki Mufrizal <mufrizalrizki@gmail.com>
+@Since Mar 21, 2016
+@Time 11:15:59 PM
+@Encoding UTF-8
+@Project Aplikasi-Inventory
+@Package Expression package is undefined on line 9, column 12 in Templates/SpringFramework/SpringXMLConfig.xml.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+">
+
+    <context:annotation-config />
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <context:component-scan base-package="com.rizki.mufrizal.aplikasi.inventory.repository" />
+    <context:property-placeholder location="classpath:/application-test.properties" />
+    
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" >
+        <property name="driverClassName" value="${spring.datasource.driverClassName}" />
+        <property name="jdbcUrl" value="${spring.datasource.url}" />
+        <property name="username" value="${spring.datasource.username}" />
+        <property name="password" value="${spring.datasource.password}" />
+        <property name="maximumPoolSize" value="${spring.datasource.maximumPoolSize}" />
+        <property name="minimumIdle" value="${spring.datasource.minimumIdle}" />
+        <property name="maxLifetime" value="${spring.datasource.maxLifetime}" />
+        <property name="connectionTimeout" value="${spring.datasource.connectionTimeout}" />
+        <property name="idleTimeout" value="${spring.datasource.idleTimeout}" />
+        <property name="poolName" value="${spring.datasource.poolName}" />
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="cachePrepStmts">true</prop>
+                <prop key="prepStmtCacheSize">250</prop>
+                <prop key="prepStmtCacheSqlLimit">2048</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+        <property name="packagesToScan" value="com.rizki.mufrizal.aplikasi.inventory.domain" />
+    </bean>
+    
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"
+          p:sessionFactory-ref="sessionFactory"
+    />
+    
+</beans>
