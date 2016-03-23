@@ -18,7 +18,9 @@ dist/
 nbdist/
 nbactions.xml
 .nb-gradle/
-
+com.rizki.mufrizal.aplikasi.inventory.domain.Barang/
+com.rizki.mufrizal.aplikasi.inventory.domain.Pembelian/
+com.rizki.mufrizal.aplikasi.inventory.domain.Penjualan/
 
 ### Linux ###
 *~
