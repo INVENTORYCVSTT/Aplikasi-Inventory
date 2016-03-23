@@ -67,6 +67,11 @@ public class PenjualanView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabelPenjualan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelPenjualanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelPenjualan);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -199,9 +204,9 @@ public class PenjualanView extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
@@ -256,6 +261,10 @@ public class PenjualanView extends javax.swing.JInternalFrame {
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
         penjualanController.refreshPenjualan();
     }//GEN-LAST:event_refreshActionPerformed
+
+    private void tabelPenjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPenjualanMouseClicked
+        penjualanController.tampilkanDataPenjualanDetail();
+    }//GEN-LAST:event_tabelPenjualanMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
