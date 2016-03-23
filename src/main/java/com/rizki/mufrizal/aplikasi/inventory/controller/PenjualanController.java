@@ -3,6 +3,7 @@ package com.rizki.mufrizal.aplikasi.inventory.controller;
 import com.rizki.mufrizal.aplikasi.inventory.App;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.BarangAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PenjualanAbstractTableModel;
+import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PenjualanDetailAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PenjualanSementaraAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.TableAutoResizeColumn;
 import com.rizki.mufrizal.aplikasi.inventory.domain.Barang;
@@ -42,6 +43,7 @@ public class PenjualanController {
     private BarangAbstractTableModel barangAbstractTableModel;
     private PenjualanSementaraAbstractTableModel penjualanSementaraAbstractTableModel;
     private PenjualanAbstractTableModel penjualanAbstractTableModel;
+    private PenjualanDetailAbstractTableModel penjualanDetailAbstractTableModel;
     private final TableAutoResizeColumn tableAutoResizeColumn = new TableAutoResizeColumn();
 
     private final List<PenjualanSementara> penjualanSementaras = new ArrayList<>();
@@ -61,6 +63,10 @@ public class PenjualanController {
     private Integer rowsPerPageBarang = 10;
 
     public void ambilDataBarang() {
+
+        LOGGER.info("index data barang dengan hibernate search");
+        App.barangService().simpanIndexBarang();
+
         LOGGER.info("Ambil data barang");
         rowsPerPageBarang = Integer.valueOf(this.penjualanSimpanView.getPerPage().getSelectedItem().toString());
         totalRowsBarang = App.barangService().jumlahBarang();
@@ -234,6 +240,10 @@ public class PenjualanController {
     private Integer rowsPerPagePenjualan = 10;
 
     public void ambilDataPenjualan() {
+
+        LOGGER.info("index data penjualan dengan hibernate search");
+        App.penjualanService().simpanIndexPenjualan();
+
         LOGGER.info("Ambil data Penjualan");
         rowsPerPagePenjualan = Integer.valueOf(this.penjualanView.getPerPage().getSelectedItem().toString());
         totalRowsPenjualan = App.penjualanService().jumlahPenjualan();
@@ -263,6 +273,12 @@ public class PenjualanController {
         this.penjualanView.getTabelPenjualan().setModel(penjualanAbstractTableModel);
         tableAutoResizeColumn.autoResizeColumn(this.penjualanView.getTabelPenjualan());
         LOGGER.info("Paging : {}", pageNumberPenjualan);
+
+        //inisialisasi tabel penjualan detail kosong
+        List<PenjualanDetail> penjualanDetails = new ArrayList<>();
+        penjualanDetailAbstractTableModel = new PenjualanDetailAbstractTableModel(penjualanDetails);
+        this.penjualanView.getTabelPenjualanDetail().setModel(penjualanDetailAbstractTableModel);
+        tableAutoResizeColumn.autoResizeColumn(this.penjualanView.getTabelPenjualanDetail());
     }
 
     public void firstPagingPenjualan() {
@@ -301,5 +317,13 @@ public class PenjualanController {
 
     //end penjualan
     //penjualan detail
+    public void tampilkanDataPenjualanDetail() {
+        Integer index = this.penjualanView.getTabelPenjualan().getSelectedRow();
+        String kodeTransaksiPenjualan = String.valueOf(this.penjualanView.getTabelPenjualan().getValueAt(index, 1));
+        List<PenjualanDetail> penjualanDetails = App.penjualanDetailService().ambilPenjualanDetails(kodeTransaksiPenjualan);
+        penjualanDetailAbstractTableModel = new PenjualanDetailAbstractTableModel(penjualanDetails);
+        this.penjualanView.getTabelPenjualanDetail().setModel(penjualanDetailAbstractTableModel);
+        tableAutoResizeColumn.autoResizeColumn(this.penjualanView.getTabelPenjualanDetail());
+    }
     //end penjualan detail
 }
