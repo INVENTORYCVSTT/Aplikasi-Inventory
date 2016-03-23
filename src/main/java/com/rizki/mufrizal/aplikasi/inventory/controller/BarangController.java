@@ -41,6 +41,10 @@ public class BarangController {
     private Integer rowsPerPage = 10;
 
     public void ambilDataBarang() {
+        
+        LOGGER.info("index data barang dengan hibernate search");
+        App.barangService().simpanIndexBarang();
+        
         LOGGER.info("Ambil data barang");
         rowsPerPage = Integer.valueOf(this.barangView.getPerPage().getSelectedItem().toString());
         totalRows = App.barangService().jumlahBarang();
