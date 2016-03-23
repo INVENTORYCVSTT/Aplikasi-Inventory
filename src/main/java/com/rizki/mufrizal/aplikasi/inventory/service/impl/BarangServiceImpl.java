@@ -64,4 +64,14 @@ public class BarangServiceImpl implements BarangService {
         return barangRepository.getBarang(idBarang);
     }
 
+    @Override
+    public Integer jumlahCariBarang(String value) {
+        return barangRepository.jumlahCariBarang(value);
+    }
+
+    @Override
+    public List<Barang> cariBarang(String value, Integer pageNumber, Integer rowsPerPage) {
+        return barangRepository.cariBarang(value, pageNumber, rowsPerPage);
+    }
+
 }
