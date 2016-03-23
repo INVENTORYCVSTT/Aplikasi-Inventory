@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface PenjualanDetailRepository {
 
-    public List<PenjualanDetail> ambilPenjualanDetails(Integer pageNumber, Integer rowsPerPage, String kodeTransaksiPenjualan);
+    public List<PenjualanDetail> ambilPenjualanDetails(String kodeTransaksiPenjualan);
 
 }
