@@ -16,11 +16,15 @@ import java.util.List;
 public interface PenjualanService {
 
     public void simpanIndexPenjualan();
-    
+
     public void simpanPenjualan(Penjualan penjualan);
 
     public Integer jumlahPenjualan();
 
     public List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage);
+
+    public Integer jumlahCariPenjualan(String value);
+
+    public List<Penjualan> cariPenjualan(String value, Integer pageNumber, Integer rowsPerPage);
 
 }
