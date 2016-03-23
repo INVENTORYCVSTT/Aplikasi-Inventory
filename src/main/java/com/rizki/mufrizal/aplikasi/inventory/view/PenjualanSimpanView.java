@@ -38,9 +38,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelBarang = new javax.swing.JTable();
-        valueCari = new javax.swing.JTextField();
-        keyCari = new javax.swing.JComboBox<>();
-        cari = new javax.swing.JButton();
+        cari = new javax.swing.JTextField();
         refresh = new javax.swing.JButton();
         last = new javax.swing.JButton();
         next = new javax.swing.JButton();
@@ -48,6 +46,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         first = new javax.swing.JButton();
         perPage = new javax.swing.JComboBox<>();
         labelPaging = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -84,9 +83,11 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabelBarang);
 
-        keyCari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Barang", "Nama Barang", "Jenis Barang" }));
-
-        cari.setText("Cari");
+        cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cariKeyReleased(evt);
+            }
+        });
 
         refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
         refresh.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +126,8 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
 
         perPage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "50", "100" }));
 
+        jLabel6.setText("Cari");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -134,11 +137,10 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(keyCari, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cari)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(perPage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -160,9 +162,8 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(keyCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cari))
+                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -333,20 +334,24 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         penjualanController.simpanTransaksi();
     }//GEN-LAST:event_transaksiMouseClicked
 
+    private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+        penjualanController.cariDataBarang();
+    }//GEN-LAST:event_cariKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cari;
+    private javax.swing.JTextField cari;
     private javax.swing.JButton first;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox<String> keyCari;
     private javax.swing.JLabel labelPaging;
     private javax.swing.JButton last;
     private javax.swing.JTextField namaPembeli;
@@ -358,7 +363,6 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabelPenjualanSementara;
     private com.toedter.calendar.JDateChooser tanggalPenjualan;
     private javax.swing.JButton transaksi;
-    private javax.swing.JTextField valueCari;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -427,8 +431,8 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
     /**
      * @return the valueCari
      */
-    public javax.swing.JTextField getValueCari() {
-        return valueCari;
+    public javax.swing.JTextField getCari() {
+        return cari;
     }
 
     /**
