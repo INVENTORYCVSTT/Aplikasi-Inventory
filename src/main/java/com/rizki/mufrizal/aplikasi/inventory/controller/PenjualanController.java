@@ -95,14 +95,22 @@ public class PenjualanController {
 
     public void firstPagingBarang() {
         pageNumberBarang = 1;
-        ambilDataBarang();
+        if (this.penjualanView.getCari().getText().isEmpty()) {
+            ambilDataBarang();
+        } else {
+            cariDataBarang();
+        }
         LOGGER.info("Paging awal : {}", pageNumberBarang);
     }
 
     public void PreviousPagingBarang() {
         if (pageNumberBarang > 1) {
             pageNumberBarang -= 1;
-            ambilDataBarang();
+            if (this.penjualanView.getCari().getText().isEmpty()) {
+                ambilDataBarang();
+            } else {
+                cariDataBarang();
+            }
             LOGGER.info("Paging sebelum : {}", pageNumberBarang);
         }
     }
@@ -110,14 +118,22 @@ public class PenjualanController {
     public void nextPagingBarang() {
         if (pageNumberBarang < totalPageBarang) {
             pageNumberBarang += 1;
-            ambilDataBarang();
+            if (this.penjualanView.getCari().getText().isEmpty()) {
+                ambilDataBarang();
+            } else {
+                cariDataBarang();
+            }
             LOGGER.info("Paging selanjutnya : {}", pageNumberBarang);
         }
     }
 
     public void lastPagingBarang() {
         pageNumberBarang = totalPageBarang;
-        ambilDataBarang();
+        if (this.penjualanView.getCari().getText().isEmpty()) {
+            ambilDataBarang();
+        } else {
+            cariDataBarang();
+        }
         LOGGER.info("Paging akhir : {}", pageNumberBarang);
     }
 
@@ -275,14 +291,22 @@ public class PenjualanController {
 
     public void firstPagingPenjualan() {
         pageNumberPenjualan = 1;
-        ambilDataPenjualan();
+        if (this.penjualanView.getCari().getText().isEmpty()) {
+            ambilDataPenjualan();
+        } else {
+            cariDataPenjualanPadaPenjualanView();
+        }
         LOGGER.info("Paging awal : {}", pageNumberPenjualan);
     }
 
     public void PreviousPagingPenjualan() {
         if (pageNumberPenjualan > 1) {
             pageNumberPenjualan -= 1;
-            ambilDataPenjualan();
+            if (this.penjualanView.getCari().getText().isEmpty()) {
+                ambilDataPenjualan();
+            } else {
+                cariDataPenjualanPadaPenjualanView();
+            }
             LOGGER.info("Paging sebelum : {}", pageNumberPenjualan);
         }
     }
@@ -290,14 +314,22 @@ public class PenjualanController {
     public void nextPagingPenjualan() {
         if (pageNumberPenjualan < totalPagePenjualan) {
             pageNumberPenjualan += 1;
-            ambilDataPenjualan();
+            if (this.penjualanView.getCari().getText().isEmpty()) {
+                ambilDataPenjualan();
+            } else {
+                cariDataPenjualanPadaPenjualanView();
+            }
             LOGGER.info("Paging selanjutnya : {}", pageNumberPenjualan);
         }
     }
 
     public void lastPagingPenjualan() {
         pageNumberPenjualan = totalPagePenjualan;
-        ambilDataPenjualan();
+        if (this.penjualanView.getCari().getText().isEmpty()) {
+            ambilDataPenjualan();
+        } else {
+            cariDataPenjualanPadaPenjualanView();
+        }
         LOGGER.info("Paging akhir : {}", pageNumberPenjualan);
     }
 
@@ -318,4 +350,94 @@ public class PenjualanController {
         tableAutoResizeColumn.autoResizeColumn(this.penjualanView.getTabelPenjualanDetail());
     }
     //end penjualan detail
+
+    //cari data penjualan
+    public void cariDataPenjualanPadaPenjualanView() {
+        totalRowsPenjualan = 0;
+        pageNumberPenjualan = 1;
+        totalPagePenjualan = 1;
+        rowsPerPagePenjualan = 10;
+
+        if (this.penjualanView.getCari().getText().isEmpty()) {
+            ambilDataPenjualan();
+        } else {
+            String keyWord = this.penjualanView.getCari().getText();
+
+            LOGGER.info("cari data penjualan");
+            rowsPerPagePenjualan = Integer.valueOf(this.penjualanView.getPerPage().getSelectedItem().toString());
+            totalRowsPenjualan = App.penjualanService().jumlahCariPenjualan(keyWord);
+            Double dbTotalPage = Math.ceil(totalRowsPenjualan.doubleValue() / rowsPerPagePenjualan.doubleValue());
+            totalPagePenjualan = dbTotalPage.intValue();
+
+            if (pageNumberPenjualan == 1) {
+                this.penjualanView.getFirst().setEnabled(Boolean.FALSE);
+                this.penjualanView.getPrevious().setEnabled(Boolean.FALSE);
+            } else {
+                this.penjualanView.getFirst().setEnabled(Boolean.TRUE);
+                this.penjualanView.getPrevious().setEnabled(Boolean.TRUE);
+            }
+
+            if (pageNumberPenjualan.equals(totalPagePenjualan)) {
+                this.penjualanView.getNext().setEnabled(Boolean.FALSE);
+                this.penjualanView.getLast().setEnabled(Boolean.FALSE);
+            } else {
+                this.penjualanView.getNext().setEnabled(Boolean.TRUE);
+                this.penjualanView.getLast().setEnabled(Boolean.TRUE);
+            }
+
+            this.penjualanView.getLabelPaging().setText("Page " + pageNumberPenjualan + " of " + totalPagePenjualan);
+            this.penjualanView.getLabelTotalRecord().setText("Total Record " + totalRowsPenjualan);
+
+            penjualanAbstractTableModel = new PenjualanAbstractTableModel(App.penjualanService().cariPenjualan(keyWord, pageNumberPenjualan, rowsPerPagePenjualan));
+            this.penjualanView.getTabelPenjualan().setModel(penjualanAbstractTableModel);
+            tableAutoResizeColumn.autoResizeColumn(this.penjualanView.getTabelPenjualan());
+            LOGGER.info("Paging : {}", pageNumberPenjualan);
+        }
+    }
+    //end cari data penjualan
+
+    //cari data barang
+    public void cariDataBarang() {
+        totalRowsBarang = 0;
+        pageNumberBarang = 1;
+        totalPageBarang = 1;
+        rowsPerPageBarang = 10;
+
+        if (this.penjualanSimpanView.getCari().getText().isEmpty()) {
+            ambilDataBarang();
+        } else {
+            String keyWord = this.penjualanSimpanView.getCari().getText();
+
+            LOGGER.info("cari data barang");
+            rowsPerPageBarang = Integer.valueOf(this.penjualanSimpanView.getPerPage().getSelectedItem().toString());
+            totalRowsBarang = App.barangService().jumlahCariBarang(keyWord);
+            Double dbTotalPage = Math.ceil(totalRowsBarang.doubleValue() / rowsPerPageBarang.doubleValue());
+            totalPageBarang = dbTotalPage.intValue();
+
+            if (pageNumberBarang == 1) {
+                this.penjualanSimpanView.getFirst().setEnabled(Boolean.FALSE);
+                this.penjualanSimpanView.getPrevious().setEnabled(Boolean.FALSE);
+            } else {
+                this.penjualanSimpanView.getFirst().setEnabled(Boolean.TRUE);
+                this.penjualanSimpanView.getPrevious().setEnabled(Boolean.TRUE);
+            }
+
+            if (pageNumberBarang.equals(totalPageBarang)) {
+                this.penjualanSimpanView.getNext().setEnabled(Boolean.FALSE);
+                this.penjualanSimpanView.getLast().setEnabled(Boolean.FALSE);
+            } else {
+                this.penjualanSimpanView.getNext().setEnabled(Boolean.TRUE);
+                this.penjualanSimpanView.getLast().setEnabled(Boolean.TRUE);
+            }
+
+            this.penjualanSimpanView.getLabelPaging().setText("Page " + pageNumberBarang + " of " + totalPageBarang);
+
+            barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().cariBarang(keyWord, pageNumberBarang, rowsPerPageBarang));
+            this.penjualanSimpanView.getTabelBarang().setModel(barangAbstractTableModel);
+            tableAutoResizeColumn.autoResizeColumn(this.penjualanSimpanView.getTabelBarang());
+            LOGGER.info("Paging : {}", pageNumberBarang);
+        }
+
+    }
+    //end cari data barang
 }
