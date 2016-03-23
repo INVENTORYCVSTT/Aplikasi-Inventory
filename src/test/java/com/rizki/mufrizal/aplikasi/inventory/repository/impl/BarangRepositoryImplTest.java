@@ -9,12 +9,18 @@ import org.springframework.test.context.jdbc.Sql;
 import javax.sql.DataSource;
 
 /**
- * Created by labti on 22/03/16.
+ *
+ * @Author Rizki Mufrizal <mufrizalrizki@gmail.com>
+ * @Since Mar 23, 2016
+ * @Time 7:40:00 PM
+ * @Encoding UTF-8
+ * @Project Aplikasi-Inventory
+ * @Package com.rizki.mufrizal.aplikasi.inventory.repository.impl
+ *
  */
-
 @Sql(
-        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
-        scripts = {"/data/barang.sql"}
+    executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
+    scripts = {"/data/barang.sql"}
 )
 public class BarangRepositoryImplTest {
 
