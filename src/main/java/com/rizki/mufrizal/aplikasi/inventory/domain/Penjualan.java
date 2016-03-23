@@ -15,7 +15,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
+import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.TokenizerDef;
 
 /**
  *
@@ -28,25 +40,38 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
+@Indexed
+@AnalyzerDef(name = "PenjualanAnalyzer",
+    tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+    filters = {
+        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+        @TokenFilterDef(factory = SnowballPorterFilterFactory.class)
+    }
+)
 @Table(name = "tb_penjualan", indexes = {
     @Index(columnList = "kode_transaksi_penjualan", name = "kodeTransaksiPenjualan")
 })
 public class Penjualan implements Serializable {
 
     @Id
+    @DocumentId
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "kode_transaksi_penjualan", length = 150)
     private String kodeTransaksiPenjualan;
 
     @Temporal(TemporalType.DATE)
+    @Analyzer(definition = "PenjualanAnalyzer")
     @Column(name = "tanggal_transaksi", nullable = false)
+    @Field(index = org.hibernate.search.annotations.Index.YES, analyze = Analyze.YES, store = Store.NO)
     private Date tanggalTransaksi;
 
     @Column(name = "total_harga")
     private BigDecimal totalHarga;
 
+    @Analyzer(definition = "PenjualanAnalyzer")
     @Column(name = "nama_pembeli", length = 50)
+    @Field(index = org.hibernate.search.annotations.Index.YES, analyze = Analyze.YES, store = Store.NO)
     private String namaPembeli;
 
     @OneToMany(mappedBy = "penjualan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
