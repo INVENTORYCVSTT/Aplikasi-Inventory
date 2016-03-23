@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,56 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
                 .setMaxResults(rowsPerPage)
                 .setCacheable(Boolean.TRUE)
                 .list();
+    }
+
+    @Override
+    public Integer jumlahCariPenjualan(String value) {
+        FullTextSession fullTextSession = Search.getFullTextSession(sessionFactory.getCurrentSession());
+
+        QueryBuilder queryBuilder = fullTextSession
+                .getSearchFactory()
+                .buildQueryBuilder()
+                .forEntity(Penjualan.class)
+                .get();
+
+        org.apache.lucene.search.Query luceneQuery = queryBuilder
+                .keyword()
+                .fuzzy()
+                .onFields("kodeTransaksiPenjualan", "namaPembeli")
+                .matching(value)
+                .createQuery();
+
+        org.hibernate.Query hibernateQuery = fullTextSession
+                .createFullTextQuery(luceneQuery, Penjualan.class)
+                .setCacheable(Boolean.TRUE);
+
+        return hibernateQuery.list().size();
+    }
+
+    @Override
+    public List<Penjualan> cariPenjualan(String value, Integer pageNumber, Integer rowsPerPage) {
+        FullTextSession fullTextSession = Search.getFullTextSession(sessionFactory.getCurrentSession());
+
+        QueryBuilder queryBuilder = fullTextSession
+                .getSearchFactory()
+                .buildQueryBuilder()
+                .forEntity(Penjualan.class)
+                .get();
+
+        org.apache.lucene.search.Query luceneQuery = queryBuilder
+                .keyword()
+                .fuzzy()
+                .onFields("kodeTransaksiPenjualan", "namaPembeli")
+                .matching(value)
+                .createQuery();
+
+        org.hibernate.Query hibernateQuery = fullTextSession
+                .createFullTextQuery(luceneQuery, Penjualan.class)
+                .setFirstResult(rowsPerPage * (pageNumber - 1))
+                .setMaxResults(rowsPerPage)
+                .setCacheable(Boolean.TRUE);
+
+        return hibernateQuery.list();
     }
 
 }
