@@ -63,7 +63,6 @@ public class Pembelian implements Serializable {
     @Temporal(TemporalType.DATE)
     @Analyzer(definition = "PembelianAnalyzer")
     @Column(name = "tanggal_transaksi", nullable = false)
-    @Field(index = org.hibernate.search.annotations.Index.YES, analyze = Analyze.YES, store = Store.NO)
     private Date tanggalTransaksi;
 
     @Column(name = "total_harga")

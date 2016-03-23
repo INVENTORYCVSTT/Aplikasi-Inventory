@@ -63,7 +63,6 @@ public class Penjualan implements Serializable {
     @Temporal(TemporalType.DATE)
     @Analyzer(definition = "PenjualanAnalyzer")
     @Column(name = "tanggal_transaksi", nullable = false)
-    @Field(index = org.hibernate.search.annotations.Index.YES, analyze = Analyze.YES, store = Store.NO)
     private Date tanggalTransaksi;
 
     @Column(name = "total_harga")
