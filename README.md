@@ -18,13 +18,13 @@ Teknologi yang digunakan :
 
 Fitur Aplikasi :
 
-1. Input data barang
-2. Input Data Penjualan
-3. Input Data Pembelian
-4. Report Data Penjualan
-5. Audit Data Penjualan Dan Pembelian
+1. Input data barang, penjualan dan pembelian
+2. Lihat data barang, penjualan dan pembelian
+3. Pencarian data barang, penjualan dan pembelian
+4. Audit data penjualan dan pembelian
 
 Fitur Yang Telah Selesai :
 
 1. Input data barang
-2. Input Data Penjualan
+2. Input data penjualan
+3. Lihat data penjualan dan penjualan detail
