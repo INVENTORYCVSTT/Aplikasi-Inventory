@@ -47,4 +47,14 @@ public class PenjualanServiceImpl implements PenjualanService {
         return penjualanRepository.ambilPenjualans(pageNumber, rowsPerPage);
     }
 
+    @Override
+    public Integer jumlahCariPenjualan(String value) {
+        return penjualanRepository.jumlahCariPenjualan(value);
+    }
+
+    @Override
+    public List<Penjualan> cariPenjualan(String value, Integer pageNumber, Integer rowsPerPage) {
+        return penjualanRepository.cariPenjualan(value, pageNumber, rowsPerPage);
+    }
+
 }
