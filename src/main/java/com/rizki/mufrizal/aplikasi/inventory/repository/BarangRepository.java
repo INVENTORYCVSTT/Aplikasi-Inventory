@@ -16,7 +16,7 @@ import java.util.List;
 public interface BarangRepository {
 
     public void simpanIndexBarang();
-    
+
     public void simpanBarang(Barang barang);
 
     public void editBarang(Barang barang);
@@ -28,5 +28,9 @@ public interface BarangRepository {
     public List<Barang> ambilBarangs(Integer pageNumber, Integer rowsPerPage);
 
     public Barang getBarang(String idBarang);
+
+    public Integer jumlahCariBarang(String value);
+    
+    public List<Barang> cariBarang(String value, Integer pageNumber, Integer rowsPerPage);
 
 }
