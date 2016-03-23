@@ -26,8 +26,8 @@ public class PenjualanDetailServiceImpl implements PenjualanDetailService {
     private PenjualanDetailRepository penjualanDetailRepository;
 
     @Override
-    public List<PenjualanDetail> ambilPenjualanDetails(Integer pageNumber, Integer rowsPerPage, String kodeTransaksiPenjualan) {
-        return penjualanDetailRepository.ambilPenjualanDetails(pageNumber, rowsPerPage, kodeTransaksiPenjualan);
+    public List<PenjualanDetail> ambilPenjualanDetails(String kodeTransaksiPenjualan) {
+        return penjualanDetailRepository.ambilPenjualanDetails(kodeTransaksiPenjualan);
     }
 
 }
