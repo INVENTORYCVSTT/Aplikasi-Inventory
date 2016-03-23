@@ -1,6 +1,9 @@
 package com.rizki.mufrizal.aplikasi.inventory;
 
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.rizki.mufrizal.aplikasi.inventory.repository.impl.BarangRepositoryImplTest;
 import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,7 +22,11 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/ApplicationTestRepositoryContext.xml"})
 @TestExecutionListeners({
-    DependencyInjectionTestExecutionListener.class
+    DependencyInjectionTestExecutionListener.class,
+        DbUnitTestExecutionListener.class
+})
+@Suite.SuiteClasses({
+        BarangRepositoryImplTest.class
 })
 public class AppTest {
 
