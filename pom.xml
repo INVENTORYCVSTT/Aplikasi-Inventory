@@ -91,11 +91,6 @@
             <artifactId>spring-test-dbunit</artifactId>
             <version>1.2.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.dbunit</groupId>
-            <artifactId>dbunit</artifactId>
-            <version>2.5.1</version>
-        </dependency>
 
         <!-- hibernate -->
         <dependency>
@@ -138,6 +133,13 @@
             <version>5.1.38</version>
         </dependency>
         
+        <!-- h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.191</version>
+        </dependency>
+        
         <!-- bcrypt-->
         <dependency>
             <groupId>de.svenkubiak</groupId>
@@ -150,6 +152,13 @@
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
+        </dependency>
+        
+        <!-- jasper report-->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.2.1</version>
         </dependency>
 
     </dependencies>
