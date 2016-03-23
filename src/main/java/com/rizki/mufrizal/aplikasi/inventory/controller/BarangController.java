@@ -41,10 +41,6 @@ public class BarangController {
     private Integer rowsPerPage = 10;
 
     public void ambilDataBarang() {
-        
-        LOGGER.info("index data barang dengan hibernate search");
-        App.barangService().simpanIndexBarang();
-        
         LOGGER.info("Ambil data barang");
         rowsPerPage = Integer.valueOf(this.barangView.getPerPage().getSelectedItem().toString());
         totalRows = App.barangService().jumlahBarang();
@@ -77,15 +73,24 @@ public class BarangController {
     }
 
     public void firstPaging() {
+        if (this.barangView.getCari().getText().isEmpty()) {
+            ambilDataBarang();
+        } else {
+            cariDataBarang();
+        }
         pageNumber = 1;
-        ambilDataBarang();
+
         LOGGER.info("Paging awal : {}", pageNumber);
     }
 
     public void PreviousPaging() {
         if (pageNumber > 1) {
             pageNumber -= 1;
-            ambilDataBarang();
+            if (this.barangView.getCari().getText().isEmpty()) {
+                ambilDataBarang();
+            } else {
+                cariDataBarang();
+            }
             LOGGER.info("Paging sebelum : {}", pageNumber);
         }
     }
@@ -93,18 +98,30 @@ public class BarangController {
     public void nextPaging() {
         if (pageNumber < totalPage) {
             pageNumber += 1;
-            ambilDataBarang();
+            if (this.barangView.getCari().getText().isEmpty()) {
+                ambilDataBarang();
+            } else {
+                cariDataBarang();
+            }
             LOGGER.info("Paging selanjutnya : {}", pageNumber);
         }
     }
 
     public void lastPaging() {
         pageNumber = totalPage;
-        ambilDataBarang();
+        if (this.barangView.getCari().getText().isEmpty()) {
+            ambilDataBarang();
+        } else {
+            cariDataBarang();
+        }
         LOGGER.info("Paging akhir : {}", pageNumber);
     }
 
     public void refresh() {
+        totalRows = 0;
+        pageNumber = 1;
+        totalPage = 1;
+        rowsPerPage = 10;
         ambilDataBarang();
         LOGGER.info("refresh paging : {}", pageNumber);
     }
@@ -265,4 +282,51 @@ public class BarangController {
         this.barangView.getEdit().setEnabled(Boolean.FALSE);
     }
     //end disable or enable
+
+    //cari data barang
+    public void cariDataBarang() {
+        totalRows = 0;
+        pageNumber = 1;
+        totalPage = 1;
+        rowsPerPage = 10;
+
+        if (this.barangView.getCari().getText().isEmpty()) {
+            ambilDataBarang();
+        } else {
+
+            String keyWord = this.barangView.getCari().getText();
+
+            LOGGER.info("cari data barang");
+            rowsPerPage = Integer.valueOf(this.barangView.getPerPage().getSelectedItem().toString());
+            totalRows = App.barangService().jumlahCariBarang(keyWord);
+            Double dbTotalPage = Math.ceil(totalRows.doubleValue() / rowsPerPage.doubleValue());
+            totalPage = dbTotalPage.intValue();
+
+            if (pageNumber == 1) {
+                this.barangView.getFirst().setEnabled(Boolean.FALSE);
+                this.barangView.getPrevious().setEnabled(Boolean.FALSE);
+            } else {
+                this.barangView.getFirst().setEnabled(Boolean.TRUE);
+                this.barangView.getPrevious().setEnabled(Boolean.TRUE);
+            }
+
+            if (pageNumber.equals(totalPage)) {
+                this.barangView.getNext().setEnabled(Boolean.FALSE);
+                this.barangView.getLast().setEnabled(Boolean.FALSE);
+            } else {
+                this.barangView.getNext().setEnabled(Boolean.TRUE);
+                this.barangView.getLast().setEnabled(Boolean.TRUE);
+            }
+
+            this.barangView.getLabelPaging().setText("Page " + pageNumber + " of " + totalPage);
+            this.barangView.getLabelTotalRecord().setText("Total Record " + totalRows);
+
+            barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().cariBarang(keyWord, pageNumber, rowsPerPage));
+            this.barangView.getTabelBarang().setModel(barangAbstractTableModel);
+            tableAutoResizeColumn.autoResizeColumn(this.barangView.getTabelBarang());
+            LOGGER.info("Paging : {}", pageNumber);
+        }
+
+    }
+    //end cari data barang
 }
