@@ -56,6 +56,8 @@ public class DataSourceConfiguration {
         properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("spring.datasource.hbm2ddl.auto"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("spring.datasource.show_sql"));
         properties.put("hibernate.format_sql", environment.getRequiredProperty("spring.datasource.format_sql"));
+        properties.put("hibernate.search.default.directory_provider", environment.getRequiredProperty("hibernate.search.default.directory_provider"));
+        properties.put("hibernate.search.default.indexBase", environment.getRequiredProperty("hibernate.search.default.indexBase"));
         return properties;
     }
 
