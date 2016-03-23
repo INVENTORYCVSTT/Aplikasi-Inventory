@@ -63,10 +63,6 @@ public class PenjualanController {
     private Integer rowsPerPageBarang = 10;
 
     public void ambilDataBarang() {
-
-        LOGGER.info("index data barang dengan hibernate search");
-        App.barangService().simpanIndexBarang();
-
         LOGGER.info("Ambil data barang");
         rowsPerPageBarang = Integer.valueOf(this.penjualanSimpanView.getPerPage().getSelectedItem().toString());
         totalRowsBarang = App.barangService().jumlahBarang();
@@ -240,10 +236,6 @@ public class PenjualanController {
     private Integer rowsPerPagePenjualan = 10;
 
     public void ambilDataPenjualan() {
-
-        LOGGER.info("index data penjualan dengan hibernate search");
-        App.penjualanService().simpanIndexPenjualan();
-
         LOGGER.info("Ambil data Penjualan");
         rowsPerPagePenjualan = Integer.valueOf(this.penjualanView.getPerPage().getSelectedItem().toString());
         totalRowsPenjualan = App.penjualanService().jumlahPenjualan();
