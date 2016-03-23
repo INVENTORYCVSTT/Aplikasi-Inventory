@@ -24,12 +24,12 @@ public class PenjualanDetailRepositoryImpl implements PenjualanDetailRepository 
     private SessionFactory sessionFactory;
 
     @Override
-    public List<PenjualanDetail> ambilPenjualanDetails(Integer pageNumber, Integer rowsPerPage, String kodeTransaksiPenjualan) {
+    public List<PenjualanDetail> ambilPenjualanDetails(String kodeTransaksiPenjualan) {
+        System.out.println("cek" + kodeTransaksiPenjualan);
         return sessionFactory
                 .getCurrentSession()
-                .createCriteria(PenjualanDetail.class)
-                .setFirstResult(rowsPerPage * (pageNumber - 1))
-                .setMaxResults(rowsPerPage)
+                .createQuery("select pd from PenjualanDetail pd left join fetch pd.penjualan p left join fetch pd.barang where p.kodeTransaksiPenjualan = :kodeTransaksiPenjualan")
+                .setParameter("kodeTransaksiPenjualan", kodeTransaksiPenjualan)
                 .setCacheable(Boolean.TRUE)
                 .list();
     }
