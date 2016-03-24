@@ -15,8 +15,6 @@ import java.util.List;
  */
 public interface BarangRepository {
 
-    public void simpanIndexBarang();
-
     public void simpanBarang(Barang barang);
 
     public void editBarang(Barang barang);

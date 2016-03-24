@@ -17,19 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
-import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
-import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.AnalyzerDef;
-import org.hibernate.search.annotations.DocumentId;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
-import org.hibernate.search.annotations.TokenFilterDef;
-import org.hibernate.search.annotations.TokenizerDef;
 
 /**
  *
@@ -42,29 +30,18 @@ import org.hibernate.search.annotations.TokenizerDef;
  *
  */
 @Entity
-@Indexed
-@AnalyzerDef(name = "BarangAnalyzer",
-    tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
-    filters = {
-        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
-        @TokenFilterDef(factory = SnowballPorterFilterFactory.class)
-    }
-)
 @Table(name = "tb_barang", indexes = {
     @Index(columnList = "id_barang", name = "idBarang")
 })
 public class Barang implements Serializable {
 
     @Id
-    @DocumentId
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id_barang", length = 150)
     private String idBarang;
 
-    @Analyzer(definition = "BarangAnalyzer")
     @Column(name = "nama_barang", length = 50, nullable = false)
-    @Field(index = org.hibernate.search.annotations.Index.YES, analyze = Analyze.YES, store = Store.NO)
     private String namaBarang;
 
     @Enumerated(EnumType.STRING)

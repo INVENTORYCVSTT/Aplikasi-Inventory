@@ -7,15 +7,14 @@ Teknologi yang digunakan :
 1. Java 8
 2. Spring Framework
 3. Hibernate Framework
-4. Hibernate Envers
-5. Hibernate Search
-6. HikariCP
-7. Ehcache
-8. Maven
-9. MariaDB
-10. JBCrypt
-11. Jcalendar
-12. Slf4j
+4. Hibernate Search
+5. HikariCP
+6. Ehcache
+7. Maven
+8. MariaDB
+9. JBCrypt
+10. Jcalendar
+11. Slf4j
 
 Fitur Aplikasi :
 

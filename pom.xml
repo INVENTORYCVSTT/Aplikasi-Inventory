@@ -108,16 +108,6 @@
             <artifactId>hibernate-envers</artifactId>
             <version>5.1.0.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-orm</artifactId>
-            <version>5.5.2.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-directory-provider</artifactId>
-            <version>8.2.0.Final</version>
-        </dependency>
         
         <!-- ehcache-->
         <dependency>
@@ -154,13 +144,6 @@
             <version>1.4</version>
         </dependency>
         
-        <!-- jasper report-->
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports</artifactId>
-            <version>6.2.1</version>
-        </dependency>
-
     </dependencies>
   
     <build>

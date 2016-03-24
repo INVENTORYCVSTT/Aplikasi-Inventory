@@ -27,12 +27,6 @@ public class BarangServiceImpl implements BarangService {
 
     @Transactional
     @Override
-    public void simpanIndexBarang() {
-        barangRepository.simpanIndexBarang();
-    }
-
-    @Transactional
-    @Override
     public void simpanBarang(Barang barang) {
         barangRepository.simpanBarang(barang);
     }

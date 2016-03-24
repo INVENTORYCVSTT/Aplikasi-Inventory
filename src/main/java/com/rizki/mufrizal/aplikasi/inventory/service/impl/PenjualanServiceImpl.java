@@ -27,12 +27,6 @@ public class PenjualanServiceImpl implements PenjualanService {
 
     @Transactional
     @Override
-    public void simpanIndexPenjualan() {
-        penjualanRepository.simpanIndexPenjualan();
-    }
-
-    @Transactional
-    @Override
     public void simpanPenjualan(Penjualan penjualan) {
         penjualanRepository.simpanPenjualan(penjualan);
     }

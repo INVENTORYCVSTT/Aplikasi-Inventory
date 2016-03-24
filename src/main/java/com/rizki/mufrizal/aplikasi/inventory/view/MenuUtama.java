@@ -1,6 +1,5 @@
 package com.rizki.mufrizal.aplikasi.inventory.view;
 
-import com.rizki.mufrizal.aplikasi.inventory.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,12 +18,6 @@ public class MenuUtama extends javax.swing.JFrame {
 
     public MenuUtama() {
         initComponents();
-
-        LOGGER.info("index data barang dengan hibernate search");
-        App.barangService().simpanIndexBarang();
-
-        LOGGER.info("index data penjualan dengan hibernate search");
-        App.penjualanService().simpanIndexPenjualan();
 
         java.awt.EventQueue.invokeLater(() -> {
             LoginView dialog = new LoginView(new javax.swing.JFrame(), Boolean.TRUE);

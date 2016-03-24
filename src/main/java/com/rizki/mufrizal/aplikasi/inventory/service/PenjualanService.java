@@ -15,8 +15,6 @@ import java.util.List;
  */
 public interface PenjualanService {
 
-    public void simpanIndexPenjualan();
-
     public void simpanPenjualan(Penjualan penjualan);
 
     public Integer jumlahPenjualan();
