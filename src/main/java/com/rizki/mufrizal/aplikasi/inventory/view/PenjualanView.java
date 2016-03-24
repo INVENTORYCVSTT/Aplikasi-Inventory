@@ -47,7 +47,8 @@ public class PenjualanView extends javax.swing.JInternalFrame {
         labelTotalRecord = new javax.swing.JLabel();
         labelPaging = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cari = new javax.swing.JTextField();
+        value = new javax.swing.JTextField();
+        key = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelPenjualanDetail = new javax.swing.JTable();
@@ -159,11 +160,13 @@ public class PenjualanView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Cari");
 
-        cari.addKeyListener(new java.awt.event.KeyAdapter() {
+        value.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                cariKeyReleased(evt);
+                valueKeyReleased(evt);
             }
         });
+
+        key.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kode Transaksi Penjualan", "Nama Pembeli" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,7 +186,9 @@ public class PenjualanView extends javax.swing.JInternalFrame {
                                 .addGap(20, 20, 20)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -193,7 +198,8 @@ public class PenjualanView extends javax.swing.JInternalFrame {
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -289,13 +295,12 @@ public class PenjualanView extends javax.swing.JInternalFrame {
         penjualanController.tampilkanDataPenjualanDetail();
     }//GEN-LAST:event_tabelPenjualanMouseClicked
 
-    private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+    private void valueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueKeyReleased
         penjualanController.cariDataPenjualanPadaPenjualanView();
-    }//GEN-LAST:event_cariKeyReleased
+    }//GEN-LAST:event_valueKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cari;
     private javax.swing.JButton first;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -304,6 +309,7 @@ public class PenjualanView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> key;
     private javax.swing.JLabel labelPaging;
     private javax.swing.JLabel labelTotalRecord;
     private javax.swing.JButton last;
@@ -313,6 +319,7 @@ public class PenjualanView extends javax.swing.JInternalFrame {
     private javax.swing.JButton refresh;
     private javax.swing.JTable tabelPenjualan;
     private javax.swing.JTable tabelPenjualanDetail;
+    private javax.swing.JTextField value;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -388,7 +395,14 @@ public class PenjualanView extends javax.swing.JInternalFrame {
     /**
      * @return the cari
      */
-    public javax.swing.JTextField getCari() {
-        return cari;
+    public javax.swing.JTextField getValue() {
+        return value;
+    }
+
+    /**
+     * @return the key
+     */
+    public javax.swing.JComboBox<String> getKey() {
+        return key;
     }
 }

@@ -95,7 +95,7 @@ public class PenjualanController {
 
     public void firstPagingBarang() {
         pageNumberBarang = 1;
-        if (this.penjualanView.getCari().getText().isEmpty()) {
+        if (this.penjualanSimpanView.getValue().getText().isEmpty()) {
             ambilDataBarang();
         } else {
             cariDataBarang();
@@ -106,7 +106,7 @@ public class PenjualanController {
     public void PreviousPagingBarang() {
         if (pageNumberBarang > 1) {
             pageNumberBarang -= 1;
-            if (this.penjualanView.getCari().getText().isEmpty()) {
+            if (this.penjualanSimpanView.getValue().getText().isEmpty()) {
                 ambilDataBarang();
             } else {
                 cariDataBarang();
@@ -118,7 +118,7 @@ public class PenjualanController {
     public void nextPagingBarang() {
         if (pageNumberBarang < totalPageBarang) {
             pageNumberBarang += 1;
-            if (this.penjualanView.getCari().getText().isEmpty()) {
+            if (this.penjualanSimpanView.getValue().getText().isEmpty()) {
                 ambilDataBarang();
             } else {
                 cariDataBarang();
@@ -129,7 +129,7 @@ public class PenjualanController {
 
     public void lastPagingBarang() {
         pageNumberBarang = totalPageBarang;
-        if (this.penjualanView.getCari().getText().isEmpty()) {
+        if (this.penjualanSimpanView.getValue().getText().isEmpty()) {
             ambilDataBarang();
         } else {
             cariDataBarang();
@@ -291,7 +291,7 @@ public class PenjualanController {
 
     public void firstPagingPenjualan() {
         pageNumberPenjualan = 1;
-        if (this.penjualanView.getCari().getText().isEmpty()) {
+        if (this.penjualanView.getValue().getText().isEmpty()) {
             ambilDataPenjualan();
         } else {
             cariDataPenjualanPadaPenjualanView();
@@ -302,7 +302,7 @@ public class PenjualanController {
     public void PreviousPagingPenjualan() {
         if (pageNumberPenjualan > 1) {
             pageNumberPenjualan -= 1;
-            if (this.penjualanView.getCari().getText().isEmpty()) {
+            if (this.penjualanView.getValue().getText().isEmpty()) {
                 ambilDataPenjualan();
             } else {
                 cariDataPenjualanPadaPenjualanView();
@@ -314,7 +314,7 @@ public class PenjualanController {
     public void nextPagingPenjualan() {
         if (pageNumberPenjualan < totalPagePenjualan) {
             pageNumberPenjualan += 1;
-            if (this.penjualanView.getCari().getText().isEmpty()) {
+            if (this.penjualanView.getValue().getText().isEmpty()) {
                 ambilDataPenjualan();
             } else {
                 cariDataPenjualanPadaPenjualanView();
@@ -325,7 +325,7 @@ public class PenjualanController {
 
     public void lastPagingPenjualan() {
         pageNumberPenjualan = totalPagePenjualan;
-        if (this.penjualanView.getCari().getText().isEmpty()) {
+        if (this.penjualanView.getValue().getText().isEmpty()) {
             ambilDataPenjualan();
         } else {
             cariDataPenjualanPadaPenjualanView();
@@ -358,14 +358,21 @@ public class PenjualanController {
         totalPagePenjualan = 1;
         rowsPerPagePenjualan = 10;
 
-        if (this.penjualanView.getCari().getText().isEmpty()) {
+        if (this.penjualanView.getValue().getText().isEmpty()) {
             ambilDataPenjualan();
         } else {
-            String keyWord = this.penjualanView.getCari().getText();
+            String value = this.penjualanView.getValue().getText();
+            String key = null;
+
+            if (this.penjualanView.getKey().getSelectedIndex() == 0) {
+                key = "kodeTransaksiPenjualan";
+            } else if (this.penjualanView.getKey().getSelectedIndex() == 1) {
+                key = "namaPembeli";
+            }
 
             LOGGER.info("cari data penjualan");
             rowsPerPagePenjualan = Integer.valueOf(this.penjualanView.getPerPage().getSelectedItem().toString());
-            totalRowsPenjualan = App.penjualanService().jumlahCariPenjualan(keyWord);
+            totalRowsPenjualan = App.penjualanService().jumlahCariPenjualan(key, value);
             Double dbTotalPage = Math.ceil(totalRowsPenjualan.doubleValue() / rowsPerPagePenjualan.doubleValue());
             totalPagePenjualan = dbTotalPage.intValue();
 
@@ -388,7 +395,7 @@ public class PenjualanController {
             this.penjualanView.getLabelPaging().setText("Page " + pageNumberPenjualan + " of " + totalPagePenjualan);
             this.penjualanView.getLabelTotalRecord().setText("Total Record " + totalRowsPenjualan);
 
-            penjualanAbstractTableModel = new PenjualanAbstractTableModel(App.penjualanService().cariPenjualan(keyWord, pageNumberPenjualan, rowsPerPagePenjualan));
+            penjualanAbstractTableModel = new PenjualanAbstractTableModel(App.penjualanService().cariPenjualan(key, value, pageNumberPenjualan, rowsPerPagePenjualan));
             this.penjualanView.getTabelPenjualan().setModel(penjualanAbstractTableModel);
             tableAutoResizeColumn.autoResizeColumn(this.penjualanView.getTabelPenjualan());
             LOGGER.info("Paging : {}", pageNumberPenjualan);
@@ -403,14 +410,21 @@ public class PenjualanController {
         totalPageBarang = 1;
         rowsPerPageBarang = 10;
 
-        if (this.penjualanSimpanView.getCari().getText().isEmpty()) {
+        if (this.penjualanSimpanView.getValue().getText().isEmpty()) {
             ambilDataBarang();
         } else {
-            String keyWord = this.penjualanSimpanView.getCari().getText();
+            String value = this.penjualanSimpanView.getValue().getText();
+            String key = null;
+
+            if (this.penjualanSimpanView.getKey().getSelectedIndex() == 0) {
+                key = "idBarang";
+            } else if (this.penjualanSimpanView.getKey().getSelectedIndex() == 1) {
+                key = "namaBarang";
+            }
 
             LOGGER.info("cari data barang");
             rowsPerPageBarang = Integer.valueOf(this.penjualanSimpanView.getPerPage().getSelectedItem().toString());
-            totalRowsBarang = App.barangService().jumlahCariBarang(keyWord);
+            totalRowsBarang = App.barangService().jumlahCariBarang(key, value);
             Double dbTotalPage = Math.ceil(totalRowsBarang.doubleValue() / rowsPerPageBarang.doubleValue());
             totalPageBarang = dbTotalPage.intValue();
 
@@ -432,7 +446,7 @@ public class PenjualanController {
 
             this.penjualanSimpanView.getLabelPaging().setText("Page " + pageNumberBarang + " of " + totalPageBarang);
 
-            barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().cariBarang(keyWord, pageNumberBarang, rowsPerPageBarang));
+            barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().cariBarang(key, value, pageNumberBarang, rowsPerPageBarang));
             this.penjualanSimpanView.getTabelBarang().setModel(barangAbstractTableModel);
             tableAutoResizeColumn.autoResizeColumn(this.penjualanSimpanView.getTabelBarang());
             LOGGER.info("Paging : {}", pageNumberBarang);

@@ -27,8 +27,8 @@ public interface BarangRepository {
 
     public Barang getBarang(String idBarang);
 
-    public Integer jumlahCariBarang(String value);
-    
-    public List<Barang> cariBarang(String value, Integer pageNumber, Integer rowsPerPage);
+    public Integer jumlahCariBarang(String key, String value);
+
+    public List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage);
 
 }

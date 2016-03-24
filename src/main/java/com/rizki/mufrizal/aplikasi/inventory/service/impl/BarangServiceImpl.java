@@ -59,13 +59,13 @@ public class BarangServiceImpl implements BarangService {
     }
 
     @Override
-    public Integer jumlahCariBarang(String value) {
-        return barangRepository.jumlahCariBarang(value);
+    public Integer jumlahCariBarang(String key, String value) {
+        return barangRepository.jumlahCariBarang(key, value);
     }
 
     @Override
-    public List<Barang> cariBarang(String value, Integer pageNumber, Integer rowsPerPage) {
-        return barangRepository.cariBarang(value, pageNumber, rowsPerPage);
+    public List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage) {
+        return barangRepository.cariBarang(key, value, pageNumber, rowsPerPage);
     }
 
 }

@@ -21,8 +21,8 @@ public interface PenjualanService {
 
     public List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage);
 
-    public Integer jumlahCariPenjualan(String value);
+    public Integer jumlahCariPenjualan(String key, String value);
 
-    public List<Penjualan> cariPenjualan(String value, Integer pageNumber, Integer rowsPerPage);
+    public List<Penjualan> cariPenjualan(String key, String value, Integer pageNumber, Integer rowsPerPage);
 
 }

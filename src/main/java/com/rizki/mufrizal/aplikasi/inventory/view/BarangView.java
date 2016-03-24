@@ -66,8 +66,9 @@ public class BarangView extends javax.swing.JInternalFrame {
         refresh = new javax.swing.JButton();
         labelTotalRecord = new javax.swing.JLabel();
         labelPaging = new javax.swing.JLabel();
-        cari = new javax.swing.JTextField();
+        value = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        key = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -288,13 +289,15 @@ public class BarangView extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        cari.addKeyListener(new java.awt.event.KeyAdapter() {
+        value.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                cariKeyReleased(evt);
+                valueKeyReleased(evt);
             }
         });
 
         jLabel8.setText("Cari");
+
+        key.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Barang", "Nama Barang" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -312,7 +315,10 @@ public class BarangView extends javax.swing.JInternalFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,8 +375,9 @@ public class BarangView extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -430,14 +437,13 @@ public class BarangView extends javax.swing.JInternalFrame {
         barangController.disableComponent();
     }//GEN-LAST:event_cancelMouseClicked
 
-    private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+    private void valueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueKeyReleased
         barangController.cariDataBarang();
-    }//GEN-LAST:event_cariKeyReleased
+    }//GEN-LAST:event_valueKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel;
-    private javax.swing.JTextField cari;
     private javax.swing.JButton edit;
     private javax.swing.JButton first;
     private javax.swing.JButton hapus;
@@ -456,6 +462,7 @@ public class BarangView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JTextField jumlahBarang;
+    private javax.swing.JComboBox<String> key;
     private javax.swing.JLabel labelPaging;
     private javax.swing.JLabel labelTotalRecord;
     private javax.swing.JButton last;
@@ -469,6 +476,7 @@ public class BarangView extends javax.swing.JInternalFrame {
     private javax.swing.JButton tambah;
     private com.toedter.calendar.JDateChooser tanggalKadaluarsa;
     private javax.swing.JButton update;
+    private javax.swing.JTextField value;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -614,7 +622,14 @@ public class BarangView extends javax.swing.JInternalFrame {
     /**
      * @return the cari
      */
-    public javax.swing.JTextField getCari() {
-        return cari;
+    public javax.swing.JTextField getValue() {
+        return value;
+    }
+
+    /**
+     * @return the key
+     */
+    public javax.swing.JComboBox<String> getKey() {
+        return key;
     }
 }

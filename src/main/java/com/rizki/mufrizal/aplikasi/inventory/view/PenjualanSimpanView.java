@@ -38,7 +38,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelBarang = new javax.swing.JTable();
-        cari = new javax.swing.JTextField();
+        value = new javax.swing.JTextField();
         refresh = new javax.swing.JButton();
         last = new javax.swing.JButton();
         next = new javax.swing.JButton();
@@ -47,6 +47,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         perPage = new javax.swing.JComboBox<>();
         labelPaging = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        key = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -83,9 +84,9 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabelBarang);
 
-        cari.addKeyListener(new java.awt.event.KeyAdapter() {
+        value.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                cariKeyReleased(evt);
+                valueKeyReleased(evt);
             }
         });
 
@@ -128,6 +129,8 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Cari");
 
+        key.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Barang", "Nama Barang" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -140,10 +143,12 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(perPage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(perPage, 0, 57, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(first)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -162,8 +167,9 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -334,13 +340,12 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
         penjualanController.simpanTransaksi();
     }//GEN-LAST:event_transaksiMouseClicked
 
-    private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+    private void valueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueKeyReleased
         penjualanController.cariDataBarang();
-    }//GEN-LAST:event_cariKeyReleased
+    }//GEN-LAST:event_valueKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cari;
     private javax.swing.JButton first;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -352,6 +357,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> key;
     private javax.swing.JLabel labelPaging;
     private javax.swing.JButton last;
     private javax.swing.JTextField namaPembeli;
@@ -363,6 +369,7 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabelPenjualanSementara;
     private com.toedter.calendar.JDateChooser tanggalPenjualan;
     private javax.swing.JButton transaksi;
+    private javax.swing.JTextField value;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -429,16 +436,23 @@ public class PenjualanSimpanView extends javax.swing.JInternalFrame {
     }
 
     /**
-     * @return the valueCari
-     */
-    public javax.swing.JTextField getCari() {
-        return cari;
-    }
-
-    /**
      * @return the tabelPenjualanSementara
      */
     public javax.swing.JTable getTabelPenjualanSementara() {
         return tabelPenjualanSementara;
+    }
+
+    /**
+     * @return the value
+     */
+    public javax.swing.JTextField getValue() {
+        return value;
+    }
+
+    /**
+     * @return the key
+     */
+    public javax.swing.JComboBox<String> getKey() {
+        return key;
     }
 }

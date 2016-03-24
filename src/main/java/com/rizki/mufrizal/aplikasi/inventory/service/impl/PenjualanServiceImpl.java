@@ -42,13 +42,13 @@ public class PenjualanServiceImpl implements PenjualanService {
     }
 
     @Override
-    public Integer jumlahCariPenjualan(String value) {
-        return penjualanRepository.jumlahCariPenjualan(value);
+    public Integer jumlahCariPenjualan(String key, String value) {
+        return penjualanRepository.jumlahCariPenjualan(key, value);
     }
 
     @Override
-    public List<Penjualan> cariPenjualan(String value, Integer pageNumber, Integer rowsPerPage) {
-        return penjualanRepository.cariPenjualan(value, pageNumber, rowsPerPage);
+    public List<Penjualan> cariPenjualan(String key, String value, Integer pageNumber, Integer rowsPerPage) {
+        return penjualanRepository.cariPenjualan(key, value, pageNumber, rowsPerPage);
     }
 
 }

@@ -73,7 +73,7 @@ public class BarangController {
     }
 
     public void firstPaging() {
-        if (this.barangView.getCari().getText().isEmpty()) {
+        if (this.barangView.getValue().getText().isEmpty()) {
             ambilDataBarang();
         } else {
             cariDataBarang();
@@ -86,7 +86,7 @@ public class BarangController {
     public void PreviousPaging() {
         if (pageNumber > 1) {
             pageNumber -= 1;
-            if (this.barangView.getCari().getText().isEmpty()) {
+            if (this.barangView.getValue().getText().isEmpty()) {
                 ambilDataBarang();
             } else {
                 cariDataBarang();
@@ -98,7 +98,7 @@ public class BarangController {
     public void nextPaging() {
         if (pageNumber < totalPage) {
             pageNumber += 1;
-            if (this.barangView.getCari().getText().isEmpty()) {
+            if (this.barangView.getValue().getText().isEmpty()) {
                 ambilDataBarang();
             } else {
                 cariDataBarang();
@@ -109,7 +109,7 @@ public class BarangController {
 
     public void lastPaging() {
         pageNumber = totalPage;
-        if (this.barangView.getCari().getText().isEmpty()) {
+        if (this.barangView.getValue().getText().isEmpty()) {
             ambilDataBarang();
         } else {
             cariDataBarang();
@@ -290,15 +290,22 @@ public class BarangController {
         totalPage = 1;
         rowsPerPage = 10;
 
-        if (this.barangView.getCari().getText().isEmpty()) {
+        if (this.barangView.getValue().getText().isEmpty()) {
             ambilDataBarang();
         } else {
 
-            String keyWord = this.barangView.getCari().getText();
+            String value = this.barangView.getValue().getText();
+            String key = null;
+
+            if (this.barangView.getKey().getSelectedIndex() == 0) {
+                key = "idBarang";
+            } else if (this.barangView.getKey().getSelectedIndex() == 1) {
+                key = "namaBarang";
+            }
 
             LOGGER.info("cari data barang");
             rowsPerPage = Integer.valueOf(this.barangView.getPerPage().getSelectedItem().toString());
-            totalRows = App.barangService().jumlahCariBarang(keyWord);
+            totalRows = App.barangService().jumlahCariBarang(key, value);
             Double dbTotalPage = Math.ceil(totalRows.doubleValue() / rowsPerPage.doubleValue());
             totalPage = dbTotalPage.intValue();
 
@@ -321,7 +328,7 @@ public class BarangController {
             this.barangView.getLabelPaging().setText("Page " + pageNumber + " of " + totalPage);
             this.barangView.getLabelTotalRecord().setText("Total Record " + totalRows);
 
-            barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().cariBarang(keyWord, pageNumber, rowsPerPage));
+            barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().cariBarang(key, value, pageNumber, rowsPerPage));
             this.barangView.getTabelBarang().setModel(barangAbstractTableModel);
             tableAutoResizeColumn.autoResizeColumn(this.barangView.getTabelBarang());
             LOGGER.info("Paging : {}", pageNumber);

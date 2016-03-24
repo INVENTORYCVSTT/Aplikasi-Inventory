@@ -4,6 +4,7 @@ import com.rizki.mufrizal.aplikasi.inventory.domain.Penjualan;
 import com.rizki.mufrizal.aplikasi.inventory.repository.PenjualanRepository;
 import java.util.List;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +50,26 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
     }
 
     @Override
-    public Integer jumlahCariPenjualan(String value) {
-        return null;
+    public Integer jumlahCariPenjualan(String key, String value) {
+        return sessionFactory
+                .getCurrentSession()
+                .createCriteria(Penjualan.class)
+                .add(Restrictions.like(key, "%" + value + "%"))
+                .setCacheable(true)
+                .list()
+                .size();
     }
 
     @Override
-    public List<Penjualan> cariPenjualan(String value, Integer pageNumber, Integer rowsPerPage) {
-       return null;
+    public List<Penjualan> cariPenjualan(String key, String value, Integer pageNumber, Integer rowsPerPage) {
+        return sessionFactory
+                .getCurrentSession()
+                .createCriteria(Penjualan.class)
+                .add(Restrictions.like(key, "%" + value + "%"))
+                .setFirstResult(rowsPerPage * (pageNumber - 1))
+                .setMaxResults(rowsPerPage)
+                .setCacheable(true)
+                .list();
     }
 
 }

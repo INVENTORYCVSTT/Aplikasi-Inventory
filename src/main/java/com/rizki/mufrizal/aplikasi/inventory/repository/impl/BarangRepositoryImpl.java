@@ -4,6 +4,7 @@ import com.rizki.mufrizal.aplikasi.inventory.domain.Barang;
 import com.rizki.mufrizal.aplikasi.inventory.repository.BarangRepository;
 import java.util.List;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,18 +65,26 @@ public class BarangRepositoryImpl implements BarangRepository {
     }
 
     @Override
-    public Integer jumlahCariBarang(String value) {
-//        return sessionFactory
-//                .getCurrentSession()
-//                .createQuery("from Barang b where b.")
-//                .list()
-//                .size();
-        return null;
+    public Integer jumlahCariBarang(String key, String value) {
+        return sessionFactory
+                .getCurrentSession()
+                .createCriteria(Barang.class)
+                .add(Restrictions.like(key, "%" + value + "%"))
+                .setCacheable(true)
+                .list()
+                .size();
     }
 
     @Override
-    public List<Barang> cariBarang(String value, Integer pageNumber, Integer rowsPerPage) {
-        return null;
+    public List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage) {
+        return sessionFactory
+                .getCurrentSession()
+                .createCriteria(Barang.class)
+                .add(Restrictions.like(key, "%" + value + "%"))
+                .setFirstResult(rowsPerPage * (pageNumber - 1))
+                .setMaxResults(rowsPerPage)
+                .setCacheable(true)
+                .list();
     }
 
 }

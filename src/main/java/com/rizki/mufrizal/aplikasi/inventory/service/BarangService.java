@@ -27,7 +27,7 @@ public interface BarangService {
 
     public Barang getBarang(String idBarang);
 
-    public Integer jumlahCariBarang(String value);
+    public Integer jumlahCariBarang(String key, String value);
 
-    public List<Barang> cariBarang(String value, Integer pageNumber, Integer rowsPerPage);
+    public List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage);
 }
