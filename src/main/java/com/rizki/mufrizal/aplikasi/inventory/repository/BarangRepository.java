@@ -31,4 +31,5 @@ public interface BarangRepository {
 
     public List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage);
 
+    public List<Barang> getSemuaBarang();
 }
