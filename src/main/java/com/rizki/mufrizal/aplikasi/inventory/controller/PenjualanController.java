@@ -40,10 +40,12 @@ public class PenjualanController {
     private PenjualanView penjualanView;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PenjualanController.class);
+
     private BarangAbstractTableModel barangAbstractTableModel;
     private PenjualanSementaraAbstractTableModel penjualanSementaraAbstractTableModel;
     private PenjualanAbstractTableModel penjualanAbstractTableModel;
     private PenjualanDetailAbstractTableModel penjualanDetailAbstractTableModel;
+
     private final TableAutoResizeColumn tableAutoResizeColumn = new TableAutoResizeColumn();
 
     private final List<PenjualanSementara> penjualanSementaras = new ArrayList<>();
@@ -56,6 +58,7 @@ public class PenjualanController {
         this.penjualanView = penjualanView;
     }
 
+    //halaman simpan view
     //paging barang
     private Integer totalRowsBarang = 0;
     private Integer pageNumberBarang = 1;
@@ -244,6 +247,60 @@ public class PenjualanController {
         }
     }
 
+    //cari data barang
+    public void cariDataBarang() {
+        totalRowsBarang = 0;
+        pageNumberBarang = 1;
+        totalPageBarang = 1;
+        rowsPerPageBarang = 10;
+
+        if (this.penjualanSimpanView.getValue().getText().isEmpty()) {
+            ambilDataBarang();
+        } else {
+            String value = this.penjualanSimpanView.getValue().getText();
+            String key = null;
+
+            if (this.penjualanSimpanView.getKey().getSelectedIndex() == 0) {
+                key = "idBarang";
+            } else if (this.penjualanSimpanView.getKey().getSelectedIndex() == 1) {
+                key = "namaBarang";
+            }
+
+            LOGGER.info("cari data barang");
+            rowsPerPageBarang = Integer.valueOf(this.penjualanSimpanView.getPerPage().getSelectedItem().toString());
+            totalRowsBarang = App.barangService().jumlahCariBarang(key, value);
+            Double dbTotalPage = Math.ceil(totalRowsBarang.doubleValue() / rowsPerPageBarang.doubleValue());
+            totalPageBarang = dbTotalPage.intValue();
+
+            if (pageNumberBarang == 1) {
+                this.penjualanSimpanView.getFirst().setEnabled(Boolean.FALSE);
+                this.penjualanSimpanView.getPrevious().setEnabled(Boolean.FALSE);
+            } else {
+                this.penjualanSimpanView.getFirst().setEnabled(Boolean.TRUE);
+                this.penjualanSimpanView.getPrevious().setEnabled(Boolean.TRUE);
+            }
+
+            if (pageNumberBarang.equals(totalPageBarang)) {
+                this.penjualanSimpanView.getNext().setEnabled(Boolean.FALSE);
+                this.penjualanSimpanView.getLast().setEnabled(Boolean.FALSE);
+            } else {
+                this.penjualanSimpanView.getNext().setEnabled(Boolean.TRUE);
+                this.penjualanSimpanView.getLast().setEnabled(Boolean.TRUE);
+            }
+
+            this.penjualanSimpanView.getLabelPaging().setText("Page " + pageNumberBarang + " of " + totalPageBarang);
+
+            barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().cariBarang(key, value, pageNumberBarang, rowsPerPageBarang));
+            this.penjualanSimpanView.getTabelBarang().setModel(barangAbstractTableModel);
+            tableAutoResizeColumn.autoResizeColumn(this.penjualanSimpanView.getTabelBarang());
+            LOGGER.info("Paging : {}", pageNumberBarang);
+        }
+
+    }
+    //end cari data barang
+
+    //end halaman simpan view
+    //halaman penjualan view
     //penjualan
     //paging penjualan
     private Integer totalRowsPenjualan = 0;
@@ -402,56 +459,5 @@ public class PenjualanController {
         }
     }
     //end cari data penjualan
-
-    //cari data barang
-    public void cariDataBarang() {
-        totalRowsBarang = 0;
-        pageNumberBarang = 1;
-        totalPageBarang = 1;
-        rowsPerPageBarang = 10;
-
-        if (this.penjualanSimpanView.getValue().getText().isEmpty()) {
-            ambilDataBarang();
-        } else {
-            String value = this.penjualanSimpanView.getValue().getText();
-            String key = null;
-
-            if (this.penjualanSimpanView.getKey().getSelectedIndex() == 0) {
-                key = "idBarang";
-            } else if (this.penjualanSimpanView.getKey().getSelectedIndex() == 1) {
-                key = "namaBarang";
-            }
-
-            LOGGER.info("cari data barang");
-            rowsPerPageBarang = Integer.valueOf(this.penjualanSimpanView.getPerPage().getSelectedItem().toString());
-            totalRowsBarang = App.barangService().jumlahCariBarang(key, value);
-            Double dbTotalPage = Math.ceil(totalRowsBarang.doubleValue() / rowsPerPageBarang.doubleValue());
-            totalPageBarang = dbTotalPage.intValue();
-
-            if (pageNumberBarang == 1) {
-                this.penjualanSimpanView.getFirst().setEnabled(Boolean.FALSE);
-                this.penjualanSimpanView.getPrevious().setEnabled(Boolean.FALSE);
-            } else {
-                this.penjualanSimpanView.getFirst().setEnabled(Boolean.TRUE);
-                this.penjualanSimpanView.getPrevious().setEnabled(Boolean.TRUE);
-            }
-
-            if (pageNumberBarang.equals(totalPageBarang)) {
-                this.penjualanSimpanView.getNext().setEnabled(Boolean.FALSE);
-                this.penjualanSimpanView.getLast().setEnabled(Boolean.FALSE);
-            } else {
-                this.penjualanSimpanView.getNext().setEnabled(Boolean.TRUE);
-                this.penjualanSimpanView.getLast().setEnabled(Boolean.TRUE);
-            }
-
-            this.penjualanSimpanView.getLabelPaging().setText("Page " + pageNumberBarang + " of " + totalPageBarang);
-
-            barangAbstractTableModel = new BarangAbstractTableModel(App.barangService().cariBarang(key, value, pageNumberBarang, rowsPerPageBarang));
-            this.penjualanSimpanView.getTabelBarang().setModel(barangAbstractTableModel);
-            tableAutoResizeColumn.autoResizeColumn(this.penjualanSimpanView.getTabelBarang());
-            LOGGER.info("Paging : {}", pageNumberBarang);
-        }
-
-    }
-    //end cari data barang
+    //end halaman penjualan view
 }
