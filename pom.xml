@@ -20,14 +20,6 @@
 
     <dependencies>
         
-        <!-- junit-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        
         <!--slf4j-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -80,17 +72,6 @@
             <artifactId>spring-context-support</artifactId>
             <version>4.2.5.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>4.2.5.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.springtestdbunit</groupId>
-            <artifactId>spring-test-dbunit</artifactId>
-            <version>1.2.1</version>
-        </dependency>
 
         <!-- hibernate -->
         <dependency>
@@ -114,13 +95,6 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
             <version>2.6.11</version>
-        </dependency>
-
-        <!-- mysql-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.38</version>
         </dependency>
         
         <!-- h2 -->
