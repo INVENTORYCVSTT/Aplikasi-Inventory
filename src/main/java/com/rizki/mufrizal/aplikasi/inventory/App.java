@@ -1,6 +1,8 @@
 package com.rizki.mufrizal.aplikasi.inventory;
 
 import com.rizki.mufrizal.aplikasi.inventory.service.BarangService;
+import com.rizki.mufrizal.aplikasi.inventory.service.PembelianDetailService;
+import com.rizki.mufrizal.aplikasi.inventory.service.PembelianService;
 import com.rizki.mufrizal.aplikasi.inventory.service.PenjualanDetailService;
 import com.rizki.mufrizal.aplikasi.inventory.service.PenjualanService;
 import com.rizki.mufrizal.aplikasi.inventory.service.UserService;
@@ -67,6 +69,16 @@ public class App {
     public static PenjualanDetailService penjualanDetailService() {
         LOGGER.info("inisialisasi bean penjualan detail service");
         return (PenjualanDetailService) applicationContext.getBean("PenjualanDetailService");
+    }
+
+    public static PembelianService pembelianService() {
+        LOGGER.info("inisialisasi bean pembelian service pada spring");
+        return (PembelianService) applicationContext.getBean("PembelianService");
+    }
+
+    public static PembelianDetailService pembelianDetailService() {
+        LOGGER.info("inisialisasi bean penjualan detail service");
+        return (PembelianDetailService) applicationContext.getBean("PembelianDetailService");
     }
 
 }
