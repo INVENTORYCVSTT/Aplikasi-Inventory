@@ -68,4 +68,9 @@ public class BarangServiceImpl implements BarangService {
         return barangRepository.cariBarang(key, value, pageNumber, rowsPerPage);
     }
 
+    @Override
+    public List<Barang> getSemuaBarang() {
+        return barangRepository.getSemuaBarang();
+    }
+
 }
