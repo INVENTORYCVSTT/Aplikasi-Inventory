@@ -102,7 +102,7 @@ public class PembelianController {
         // inisialisasi tabel pembelian detail kosong
         List<PembelianDetail> pembelianDetails = new ArrayList<>();
         pembelianDetailAbstractTableModel = new PembelianDetailAbstractTableModel(pembelianDetails);
-        this.pembelianView.getTabelPembelianDetail().setModel(pembelianAbstractTableModel);
+        this.pembelianView.getTabelPembelianDetail().setModel(pembelianDetailAbstractTableModel);
         tableAutoResizeColumn.autoResizeColumn(this.pembelianView.getTabelPembelianDetail());
     }
 
