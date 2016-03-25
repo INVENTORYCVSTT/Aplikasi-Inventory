@@ -77,7 +77,7 @@ public class App {
     }
 
     public static PembelianDetailService pembelianDetailService() {
-        LOGGER.info("inisialisasi bean penjualan detail service");
+        LOGGER.info("inisialisasi bean pembelian detail service");
         return (PembelianDetailService) applicationContext.getBean("PembelianDetailService");
     }
 
