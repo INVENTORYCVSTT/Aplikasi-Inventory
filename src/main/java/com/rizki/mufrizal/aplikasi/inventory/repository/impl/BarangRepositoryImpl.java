@@ -83,4 +83,13 @@ public class BarangRepositoryImpl implements BarangRepository {
                 .list();
     }
 
+    @Override
+    public List<Barang> getSemuaBarang() {
+        return sessionFactory
+                .getCurrentSession()
+                .createCriteria(Barang.class)
+                .setCacheable(Boolean.TRUE)
+                .list();
+    }
+
 }
