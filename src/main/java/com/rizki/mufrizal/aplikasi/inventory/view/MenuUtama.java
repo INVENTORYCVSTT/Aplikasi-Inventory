@@ -15,6 +15,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private PenjualanView penjualanView;
     private PenjualanSimpanView penjualanSimpanView;
     private PembelianView pembelianView;
+    private PembelianSimpanView pembelianSimpanView;
 
     public MenuUtama() {
         initComponents();
@@ -102,6 +103,11 @@ public class MenuUtama extends javax.swing.JFrame {
         menuPembelian.add(menuItemPembelian);
 
         menuItemTambahDataPembelian.setText("Tambah Data Pembelian");
+        menuItemTambahDataPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemTambahDataPembelianActionPerformed(evt);
+            }
+        });
         menuPembelian.add(menuItemTambahDataPembelian);
 
         menu.add(menuPembelian);
@@ -132,7 +138,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private void menuItemBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBarangActionPerformed
         barangView = BarangView.getInstanceBarangView();
         if (barangView.isVisible()) {
-            System.out.println("udh ada broe");
+            LOGGER.info("udh ada broe");
         } else {
             desktopPane.add(barangView);
             barangView.setVisible(Boolean.TRUE);
@@ -142,7 +148,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private void menuItemPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPenjualanActionPerformed
         penjualanView = PenjualanView.getInstancePenjualanView();
         if (penjualanView.isVisible()) {
-            System.out.println("udh ada broe");
+            LOGGER.info("udh ada broe");
         } else {
             desktopPane.add(penjualanView);
             penjualanView.setVisible(Boolean.TRUE);
@@ -152,7 +158,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private void menuItemPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPembelianActionPerformed
         pembelianView = PembelianView.getInstancePembelianView();
         if (pembelianView.isVisible()) {
-            System.out.println("udh ada broe");
+            LOGGER.info("udh ada broe");
         } else {
             desktopPane.add(pembelianView);
             pembelianView.setVisible(Boolean.TRUE);
@@ -162,12 +168,22 @@ public class MenuUtama extends javax.swing.JFrame {
     private void menuItemTambahDataPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTambahDataPenjualanActionPerformed
         penjualanSimpanView = PenjualanSimpanView.getInstancePenjualanSimpanView();
         if (penjualanSimpanView.isVisible()) {
-            System.out.println("udh ada broe");
+            LOGGER.info("udh ada broe");
         } else {
             desktopPane.add(penjualanSimpanView);
             penjualanSimpanView.setVisible(Boolean.TRUE);
         }
     }//GEN-LAST:event_menuItemTambahDataPenjualanActionPerformed
+
+    private void menuItemTambahDataPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTambahDataPembelianActionPerformed
+        pembelianSimpanView = PembelianSimpanView.getInstancePembelianSimpanView();
+        if (pembelianSimpanView.isVisible()) {
+            LOGGER.info("udh ada broe");
+        } else {
+            desktopPane.add(pembelianSimpanView);
+            pembelianSimpanView.setVisible(Boolean.TRUE);
+        }
+    }//GEN-LAST:event_menuItemTambahDataPembelianActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about;

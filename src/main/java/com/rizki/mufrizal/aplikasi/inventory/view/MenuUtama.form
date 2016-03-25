@@ -71,6 +71,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tambah Data Pembelian"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemTambahDataPembelianActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
