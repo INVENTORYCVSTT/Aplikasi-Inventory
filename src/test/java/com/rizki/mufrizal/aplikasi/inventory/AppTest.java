@@ -1,6 +1,6 @@
 package com.rizki.mufrizal.aplikasi.inventory;
 
-import com.rizki.mufrizal.aplikasi.inventory.repository.impl.BarangRepositoryImplTest;
+import com.rizki.mufrizal.aplikasi.inventory.service.impl.BarangServiceImplTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -16,7 +16,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    BarangRepositoryImplTest.class
+    BarangServiceImplTest.class
 })
 public class AppTest {
 
