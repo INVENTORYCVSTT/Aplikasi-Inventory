@@ -55,7 +55,7 @@ public class PembelianSementaraAbstractTableModel extends AbstractTableModel {
             case 0:
                 return rowIndex + 1;
             case 1:
-                if (pembelianSementara.getIdBarang().isEmpty() || pembelianSementara.getIdBarang() == null) {
+                if (pembelianSementara.getIdBarang() == null) {
                     return "Barang Baru";
                 } else {
                     return pembelianSementara.getIdBarang();
