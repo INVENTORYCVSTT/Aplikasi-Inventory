@@ -45,11 +45,11 @@ public class PembelianDetail implements Serializable {
     private BigDecimal totalHargaPerBarang;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "kodeTransaksiPembelian", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    @JoinColumn(name = "kode_transaksi_pembelian", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Pembelian pembelian;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idBarang", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    @JoinColumn(name = "id_barang", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Barang barang;
 
     /**
