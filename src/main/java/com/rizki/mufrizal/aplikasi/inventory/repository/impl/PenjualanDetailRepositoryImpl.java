@@ -25,7 +25,6 @@ public class PenjualanDetailRepositoryImpl implements PenjualanDetailRepository 
 
     @Override
     public List<PenjualanDetail> ambilPenjualanDetails(String kodeTransaksiPenjualan) {
-        System.out.println("cek" + kodeTransaksiPenjualan);
         return sessionFactory
                 .getCurrentSession()
                 .createQuery("select pd from PenjualanDetail pd left join fetch pd.penjualan p left join fetch pd.barang where p.kodeTransaksiPenjualan = :kodeTransaksiPenjualan")

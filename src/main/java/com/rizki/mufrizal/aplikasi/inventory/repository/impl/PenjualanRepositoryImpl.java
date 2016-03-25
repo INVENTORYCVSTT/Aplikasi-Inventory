@@ -26,8 +26,6 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PenjualanRepositoryImpl.class);
-
     @Override
     public void simpanPenjualan(Penjualan penjualan) {
         sessionFactory.getCurrentSession().save(penjualan);
@@ -35,7 +33,12 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
 
     @Override
     public Integer jumlahPenjualan() {
-        return sessionFactory.getCurrentSession().createCriteria(Penjualan.class).list().size();
+        return sessionFactory
+                .getCurrentSession()
+                .createCriteria(Penjualan.class)
+                .setCacheable(Boolean.TRUE)
+                .list()
+                .size();
     }
 
     @Override
@@ -55,7 +58,7 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
                 .getCurrentSession()
                 .createCriteria(Penjualan.class)
                 .add(Restrictions.like(key, "%" + value + "%"))
-                .setCacheable(true)
+                .setCacheable(Boolean.TRUE)
                 .list()
                 .size();
     }
@@ -68,7 +71,7 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
                 .add(Restrictions.like(key, "%" + value + "%"))
                 .setFirstResult(rowsPerPage * (pageNumber - 1))
                 .setMaxResults(rowsPerPage)
-                .setCacheable(true)
+                .setCacheable(Boolean.TRUE)
                 .list();
     }
 

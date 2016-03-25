@@ -56,7 +56,7 @@ public class PembelianRepositoryImpl implements PembelianRepository {
                 .getCurrentSession()
                 .createCriteria(Pembelian.class)
                 .add(Restrictions.like(key, "%" + value + "%"))
-                .setCacheable(true)
+                .setCacheable(Boolean.TRUE)
                 .list()
                 .size();
     }
@@ -69,7 +69,7 @@ public class PembelianRepositoryImpl implements PembelianRepository {
                 .add(Restrictions.like(key, "%" + value + "%"))
                 .setFirstResult(rowsPerPage * (pageNumber - 1))
                 .setMaxResults(rowsPerPage)
-                .setCacheable(true)
+                .setCacheable(Boolean.TRUE)
                 .list();
     }
 

@@ -5,8 +5,6 @@ import com.rizki.mufrizal.aplikasi.inventory.repository.BarangRepository;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,8 +23,6 @@ public class BarangRepositoryImpl implements BarangRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BarangRepositoryImpl.class);
 
     @Override
     public void simpanBarang(Barang barang) {
