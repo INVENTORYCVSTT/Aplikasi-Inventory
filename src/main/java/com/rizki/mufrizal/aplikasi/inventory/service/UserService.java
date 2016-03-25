@@ -14,10 +14,10 @@ import com.rizki.mufrizal.aplikasi.inventory.domain.User;
  */
 public interface UserService {
 
-    public User loginUser(String email, String password);
+    User loginUser(String email, String password);
 
-    public void simpanUser(User user);
+    void simpanUser(User user);
 
-    public User cariUser(String email);
+    User cariUser(String email);
 
 }

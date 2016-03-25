@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface PembelianDetailService {
 
-    public List<PembelianDetail> ambilPembelianDetails(String kodeTransaksiPembelian);
+    List<PembelianDetail> ambilPembelianDetails(String kodeTransaksiPembelian);
 
 }

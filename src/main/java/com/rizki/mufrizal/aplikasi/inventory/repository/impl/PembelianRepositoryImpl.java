@@ -39,6 +39,7 @@ public class PembelianRepositoryImpl implements PembelianRepository {
                 .size();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Pembelian> ambilPembelians(Integer pageNumber, Integer rowsPerPage) {
         return sessionFactory
@@ -61,6 +62,7 @@ public class PembelianRepositoryImpl implements PembelianRepository {
                 .size();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Pembelian> cariPembelian(String key, String value, Integer pageNumber, Integer rowsPerPage) {
         return sessionFactory

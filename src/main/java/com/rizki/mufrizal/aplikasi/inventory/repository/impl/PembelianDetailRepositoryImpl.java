@@ -23,6 +23,7 @@ public class PembelianDetailRepositoryImpl implements PembelianDetailRepository 
     @Autowired
     private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<PembelianDetail> ambilPembelianDetails(String kodeTransaksiPembelian) {
         return sessionFactory

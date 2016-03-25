@@ -15,21 +15,21 @@ import java.util.List;
  */
 public interface BarangRepository {
 
-    public void simpanBarang(Barang barang);
+    void simpanBarang(Barang barang);
 
-    public void editBarang(Barang barang);
+    void editBarang(Barang barang);
 
-    public void hapusBarang(Barang barang);
+    void hapusBarang(Barang barang);
 
-    public Integer jumlahBarang();
+    Integer jumlahBarang();
 
-    public List<Barang> ambilBarangs(Integer pageNumber, Integer rowsPerPage);
+    List<Barang> ambilBarangs(Integer pageNumber, Integer rowsPerPage);
 
-    public Barang getBarang(String idBarang);
+    Barang getBarang(String idBarang);
 
-    public Integer jumlahCariBarang(String key, String value);
+    Integer jumlahCariBarang(String key, String value);
 
-    public List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage);
+    List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage);
 
-    public List<Barang> getSemuaBarang();
+    List<Barang> getSemuaBarang();
 }

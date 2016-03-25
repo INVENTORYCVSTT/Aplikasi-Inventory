@@ -42,7 +42,6 @@ public class PenjualanController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PenjualanController.class);
 
     private BarangAbstractTableModel barangAbstractTableModel;
-    private PenjualanSementaraAbstractTableModel penjualanSementaraAbstractTableModel;
     private PenjualanAbstractTableModel penjualanAbstractTableModel;
     private PenjualanDetailAbstractTableModel penjualanDetailAbstractTableModel;
 
@@ -147,9 +146,7 @@ public class PenjualanController {
     //end paging barang
 
     private PenjualanSementara checkContains(PenjualanSementara penjualanSementara1, List<PenjualanSementara> penjualanSementaras1) {
-        Iterator<PenjualanSementara> iterator = penjualanSementaras1.iterator();
-        while (iterator.hasNext()) {
-            PenjualanSementara ps = iterator.next();
+        for (PenjualanSementara ps : penjualanSementaras1) {
             if (ps.getIdBarang().equals(penjualanSementara1.getIdBarang())) {
                 LOGGER.info("id sama : {}", ps.getIdBarang());
                 return ps;
@@ -199,7 +196,7 @@ public class PenjualanController {
     }
 
     public void tampilPenjualanSementara() {
-        penjualanSementaraAbstractTableModel = new PenjualanSementaraAbstractTableModel(penjualanSementaras);
+        PenjualanSementaraAbstractTableModel penjualanSementaraAbstractTableModel = new PenjualanSementaraAbstractTableModel(penjualanSementaras);
         this.penjualanSimpanView.getTabelPenjualanSementara().setModel(penjualanSementaraAbstractTableModel);
         tableAutoResizeColumn.autoResizeColumn(this.penjualanSimpanView.getTabelPenjualanSementara());
     }

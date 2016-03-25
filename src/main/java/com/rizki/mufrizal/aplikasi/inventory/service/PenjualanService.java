@@ -15,14 +15,14 @@ import java.util.List;
  */
 public interface PenjualanService {
 
-    public void simpanPenjualan(Penjualan penjualan);
+    void simpanPenjualan(Penjualan penjualan);
 
-    public Integer jumlahPenjualan();
+    Integer jumlahPenjualan();
 
-    public List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage);
+    List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage);
 
-    public Integer jumlahCariPenjualan(String key, String value);
+    Integer jumlahCariPenjualan(String key, String value);
 
-    public List<Penjualan> cariPenjualan(String key, String value, Integer pageNumber, Integer rowsPerPage);
+    List<Penjualan> cariPenjualan(String key, String value, Integer pageNumber, Integer rowsPerPage);
 
 }

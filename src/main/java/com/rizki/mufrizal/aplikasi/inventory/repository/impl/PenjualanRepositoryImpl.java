@@ -41,6 +41,7 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
                 .size();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage) {
         return sessionFactory
@@ -63,6 +64,7 @@ public class PenjualanRepositoryImpl implements PenjualanRepository {
                 .size();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Penjualan> cariPenjualan(String key, String value, Integer pageNumber, Integer rowsPerPage) {
         return sessionFactory

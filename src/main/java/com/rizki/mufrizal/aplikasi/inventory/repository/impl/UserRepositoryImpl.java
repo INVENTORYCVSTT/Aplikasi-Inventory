@@ -23,6 +23,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
     @Override
     public User loginUser(String email) {
         List<User> users = sessionFactory

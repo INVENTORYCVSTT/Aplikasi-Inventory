@@ -44,6 +44,7 @@ public class BarangRepositoryImpl implements BarangRepository {
         return sessionFactory.getCurrentSession().createCriteria(Barang.class).list().size();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Barang> ambilBarangs(Integer pageNumber, Integer rowsPerPage) {
         return sessionFactory
@@ -71,6 +72,7 @@ public class BarangRepositoryImpl implements BarangRepository {
                 .size();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage) {
         return sessionFactory
@@ -83,6 +85,7 @@ public class BarangRepositoryImpl implements BarangRepository {
                 .list();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Barang> getSemuaBarang() {
         return sessionFactory

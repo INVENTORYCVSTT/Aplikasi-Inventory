@@ -239,9 +239,7 @@ public class PembelianController {
     }
 
     private String checkContains(String idBarang, List<String> barangs) {
-        Iterator<String> iterator = barangs.iterator();
-        while (iterator.hasNext()) {
-            String b = iterator.next();
+        for (String b : barangs) {
             if (b.equals(idBarang)) {
                 LOGGER.info("id sama : {}", b);
                 return b;

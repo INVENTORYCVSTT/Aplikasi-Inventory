@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface PenjualanDetailService {
 
-    public List<PenjualanDetail> ambilPenjualanDetails(String kodeTransaksiPenjualan);
+    List<PenjualanDetail> ambilPenjualanDetails(String kodeTransaksiPenjualan);
 }

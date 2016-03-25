@@ -15,14 +15,14 @@ import java.util.List;
  */
 public interface PembelianRepository {
 
-    public void simpanPembelian(Pembelian pembelian);
+    void simpanPembelian(Pembelian pembelian);
 
-    public Integer jumlahPembelian();
+    Integer jumlahPembelian();
 
-    public List<Pembelian> ambilPembelians(Integer pageNumber, Integer rowsPerPage);
+    List<Pembelian> ambilPembelians(Integer pageNumber, Integer rowsPerPage);
 
-    public Integer jumlahCariPembelian(String key, String value);
+    Integer jumlahCariPembelian(String key, String value);
 
-    public List<Pembelian> cariPembelian(String key, String value, Integer pageNumber, Integer rowsPerPage);
+    List<Pembelian> cariPembelian(String key, String value, Integer pageNumber, Integer rowsPerPage);
 
 }

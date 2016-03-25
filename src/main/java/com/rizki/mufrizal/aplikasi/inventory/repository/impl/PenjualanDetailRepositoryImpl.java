@@ -23,6 +23,7 @@ public class PenjualanDetailRepositoryImpl implements PenjualanDetailRepository 
     @Autowired
     private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<PenjualanDetail> ambilPenjualanDetails(String kodeTransaksiPenjualan) {
         return sessionFactory
