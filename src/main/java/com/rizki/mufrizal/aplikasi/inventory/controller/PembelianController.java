@@ -3,8 +3,12 @@ package com.rizki.mufrizal.aplikasi.inventory.controller;
 import com.rizki.mufrizal.aplikasi.inventory.App;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PembelianAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PembelianDetailAbstractTableModel;
+import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.PembelianSementaraAbstractTableModel;
 import com.rizki.mufrizal.aplikasi.inventory.abstractTableModel.TableAutoResizeColumn;
+import com.rizki.mufrizal.aplikasi.inventory.domain.Barang;
 import com.rizki.mufrizal.aplikasi.inventory.domain.PembelianDetail;
+import com.rizki.mufrizal.aplikasi.inventory.domain.PembelianSementara;
+import com.rizki.mufrizal.aplikasi.inventory.view.PembelianSimpanView;
 import com.rizki.mufrizal.aplikasi.inventory.view.PembelianView;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +30,23 @@ public class PembelianController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PembelianController.class);
 
     private PembelianView pembelianView;
+    private PembelianSimpanView pembelianSimpanView;
     
     private final TableAutoResizeColumn tableAutoResizeColumn = new TableAutoResizeColumn();
     
+    private List<PembelianSementara> pembelianSementaras = new ArrayList<>();
+    private List<String> isiComboBox = new ArrayList<>();
+    
     private PembelianAbstractTableModel pembelianAbstractTableModel;
     private PembelianDetailAbstractTableModel pembelianDetailAbstractTableModel;
+    private PembelianSementaraAbstractTableModel pembelianSementaraAbstractTableModel;
 
     public PembelianController(PembelianView pembelianView) {
         this.pembelianView = pembelianView;
+    }
+
+    public PembelianController(PembelianSimpanView pembelianSimpanView) {
+        this.pembelianSimpanView = pembelianSimpanView;
     }
 
     //halaman pembelian view
@@ -194,5 +207,31 @@ public class PembelianController {
     //end pembelian detail
     
     //end halaman pembelian view
+    
+    //halaman simpan pembelian view
+    
+    public List<String> tampilkanDataBarangComboBox(){
+        List<Barang> barangs = App.barangService().getSemuaBarang();
+        
+        isiComboBox.add("--Pilih--");
+        
+        barangs.stream().map((barang) -> {
+            isiComboBox.add(barang.getIdBarang());
+            return barang;
+        }).forEach((barang) -> {
+            LOGGER.debug("cek isi id barang : {}", barang.getIdBarang());
+        });
+
+        return isiComboBox;
+    }
+    
+    public void inisialisasiTabelPembelianKosong(){
+        //inisialisasi tabel pembelian kosong
+        pembelianSementaraAbstractTableModel = new PembelianSementaraAbstractTableModel(pembelianSementaras);
+        this.pembelianSimpanView.getTabelPembelianSementara().setModel(pembelianSementaraAbstractTableModel);
+        tableAutoResizeColumn.autoResizeColumn(this.pembelianSimpanView.getTabelPembelianSementara());
+    }
+    
+    //end halaman simpan pembelian view
     
 }
