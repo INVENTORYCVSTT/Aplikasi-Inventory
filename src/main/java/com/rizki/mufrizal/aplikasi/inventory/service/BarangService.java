@@ -30,4 +30,7 @@ public interface BarangService {
     public Integer jumlahCariBarang(String key, String value);
 
     public List<Barang> cariBarang(String key, String value, Integer pageNumber, Integer rowsPerPage);
+
+    public List<Barang> getSemuaBarang();
+
 }
