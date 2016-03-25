@@ -10,13 +10,16 @@
 -->
 
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+    
     <diskStore path="java.io.tmpdir" />
+    
     <defaultCache
         maxElementsInMemory="10000"
         eternal="false"
         timeToIdleSeconds="120"
         timeToLiveSeconds="120"
         overflowToDisk="true" />
+    
     <cache name="barang"
            maxElementsInMemory="10"
            eternal="true"
