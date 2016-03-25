@@ -27,5 +27,6 @@ Fitur Yang Telah Selesai :
 
 1. Input data barang
 2. Input data penjualan
-3. Lihat data penjualan dan penjualan detail
-4. Lihat data pembelian dan pembelian detail
+3. Input data pembelian
+4. Lihat data penjualan dan penjualan detail
+5. Lihat data pembelian dan pembelian detail
