@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>Aplikasi-Inventory</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/RizkiMufrizal/Aplikasi-Inventory</url>
 
     <organization>
         <name>rizki mufrizal</name>
@@ -150,6 +150,46 @@
                         <phase>package</phase> 
                         <goals>
                             <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.11</version>
+                <configuration>
+                    <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                    <properties>
+                        <owner>Rizki Mufrizal (https://rizkimufrizal.github.io/)</owner>
+                        <email>mufrizalrizki@gmail.com</email>
+                        <project.url>https://github.com/RizkiMufrizal/Aplikasi-Inventory</project.url>
+                        <project.inceptionYear>2016</project.inceptionYear>
+                        <project.groupId>com.rizki.mufrizal.aplikasi.inventory</project.groupId>
+                        <project.artifactId>Aplikasi-Inventory</project.artifactId>
+                        <project.name>Aplikasi Inventory</project.name>
+                    </properties>
+                    <excludes>
+                        <exclude>**/README</exclude>
+                        <exclude>dami-inventory.csv</exclude>
+                        <exclude>database/**</exclude>
+                        <exclude>logs/**</exclude>
+                        <exclude>target/**</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>pom.xml</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/BarangView.form</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/LoginView.form</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/MenuUtama.form</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/PembelianView.form</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/PenjualanSimpanView.form</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/PenjualanView.form</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/RegisterView.form</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
