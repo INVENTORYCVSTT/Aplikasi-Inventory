@@ -103,7 +103,6 @@ public class UserController {
                 userRegiUser.setPassword(String.valueOf(this.registerView.getPassword().getPassword()));
                 App.userService().simpanUser(userRegiUser);
                 this.registerView.getError().setText("Anda berhasil melakukan registrasi, silahkan login");
-                return userRegiUser;
             } else {
                 this.registerView.getError().setText("email sudah digunakan");
             }
