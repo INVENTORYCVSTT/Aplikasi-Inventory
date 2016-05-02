@@ -5,6 +5,8 @@ import com.rizki.mufrizal.aplikasi.inventory.repository.PembelianDetailRepositor
 import com.rizki.mufrizal.aplikasi.inventory.service.PembelianDetailService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +22,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("PembelianDetailService")
 @Transactional(readOnly = true)
+@CacheConfig(cacheNames = "barang")
 public class PembelianDetailServiceImpl implements PembelianDetailService {
 
     @Autowired
     private PembelianDetailRepository pembelianDetailRepository;
 
+    @Cacheable(key = "#kodeTransaksiPembelian")
     @Override
     public List<PembelianDetail> ambilPembelianDetails(String kodeTransaksiPembelian) {
         return pembelianDetailRepository.ambilPembelianDetails(kodeTransaksiPembelian);
