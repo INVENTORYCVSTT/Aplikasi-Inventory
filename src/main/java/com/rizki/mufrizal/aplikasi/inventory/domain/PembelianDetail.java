@@ -30,6 +30,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
 
 /**
  *
@@ -42,6 +43,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
+@Audited
 @Table(name = "tb_pembelian_detail", indexes = {
     @Index(columnList = "kode_transaksi_pembelian_detail", name = "kodeTransaksiPembelianDetail")
 })

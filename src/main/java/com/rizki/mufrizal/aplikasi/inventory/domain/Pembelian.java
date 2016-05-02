@@ -31,6 +31,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
 
 /**
  *
@@ -43,6 +44,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
+@Audited
 @Table(name = "tb_pembelian", indexes = {
     @Index(columnList = "kode_transaksi_pembelian", name = "kodeTransaksiPembelian")
 })
