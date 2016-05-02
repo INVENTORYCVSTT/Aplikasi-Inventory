@@ -186,10 +186,12 @@
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/BarangView.form</exclude>
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/LoginView.form</exclude>
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/MenuUtama.form</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/PembelianSimpanView.form</exclude>
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/PembelianView.form</exclude>
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/PenjualanSimpanView.form</exclude>
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/PenjualanView.form</exclude>
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/RegisterView.form</exclude>
+                        <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/AboutView.form</exclude>
                     </excludes>
                 </configuration>
                 <executions>
