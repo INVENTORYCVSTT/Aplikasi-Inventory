@@ -192,6 +192,8 @@
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/PenjualanView.form</exclude>
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/RegisterView.form</exclude>
                         <exclude>src/main/java/com/rizki/mufrizal/aplikasi/inventory/view/AboutView.form</exclude>
+                        <exclude>src/main/resources/ehcache.xml</exclude>
+                        <exclude>src/main/resources/logback.xml</exclude>
                     </excludes>
                 </configuration>
                 <executions>
