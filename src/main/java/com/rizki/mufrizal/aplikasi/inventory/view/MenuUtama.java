@@ -16,6 +16,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private PenjualanSimpanView penjualanSimpanView;
     private PembelianView pembelianView;
     private PembelianSimpanView pembelianSimpanView;
+    private AboutView aboutView;
 
     public MenuUtama() {
         initComponents();
@@ -56,6 +57,11 @@ public class MenuUtama extends javax.swing.JFrame {
         file.setText("File");
 
         exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
         file.add(exit);
 
         menu.add(file);
@@ -115,6 +121,11 @@ public class MenuUtama extends javax.swing.JFrame {
         help.setText("Help");
 
         about.setText("About");
+        about.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutActionPerformed(evt);
+            }
+        });
         help.add(about);
 
         menu.add(help);
@@ -184,6 +195,20 @@ public class MenuUtama extends javax.swing.JFrame {
             pembelianSimpanView.setVisible(Boolean.TRUE);
         }
     }//GEN-LAST:event_menuItemTambahDataPembelianActionPerformed
+
+    private void aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutActionPerformed
+        aboutView = AboutView.getInstanceAboutView();
+        if (aboutView.isVisible()) {
+            LOGGER.info("udh ada broe");
+        } else {
+            desktopPane.add(aboutView);
+            aboutView.setVisible(Boolean.TRUE);
+        }
+    }//GEN-LAST:event_aboutActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about;
