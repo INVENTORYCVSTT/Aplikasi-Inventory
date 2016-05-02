@@ -21,7 +21,7 @@
         overflowToDisk="true" />
     
     <cache name="barang"
-           maxElementsInMemory="10"
+           maxElementsInMemory="500"
            eternal="true"
            overflowToDisk="true" />
 </ehcache>
