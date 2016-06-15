@@ -9,12 +9,11 @@ Teknologi yang digunakan :
 3. Hibernate Framework
 4. Hibernate Envers
 5. HikariCP
-6. Ehcache
-7. Maven
-8. H2 Database
-9. JBCrypt
-10. Jcalendar
-11. Slf4j
+6. Maven
+7. H2 Database
+8. JBCrypt
+9. Jcalendar
+10. Slf4j
 
 Fitur Aplikasi :
 
