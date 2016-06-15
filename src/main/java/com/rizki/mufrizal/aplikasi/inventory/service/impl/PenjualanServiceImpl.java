@@ -20,9 +20,6 @@ import com.rizki.mufrizal.aplikasi.inventory.repository.PenjualanRepository;
 import com.rizki.mufrizal.aplikasi.inventory.service.PenjualanService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,38 +35,32 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("PenjualanService")
 @Transactional(readOnly = true)
-@CacheConfig(cacheNames = "barang")
 public class PenjualanServiceImpl implements PenjualanService {
 
     @Autowired
     private PenjualanRepository penjualanRepository;
 
-    @CacheEvict(key = "#penjualan", allEntries = true)
     @Transactional
     @Override
     public void simpanPenjualan(Penjualan penjualan) {
         penjualanRepository.simpanPenjualan(penjualan);
     }
 
-    @Cacheable
     @Override
     public Integer jumlahPenjualan() {
         return penjualanRepository.jumlahPenjualan();
     }
 
-    @Cacheable(key = "#pageNumber")
     @Override
     public List<Penjualan> ambilPenjualans(Integer pageNumber, Integer rowsPerPage) {
         return penjualanRepository.ambilPenjualans(pageNumber, rowsPerPage);
     }
 
-    @Cacheable
     @Override
     public Integer jumlahCariPenjualan(String key, String value) {
         return penjualanRepository.jumlahCariPenjualan(key, value);
     }
 
-    @Cacheable
     @Override
     public List<Penjualan> cariPenjualan(String key, String value, Integer pageNumber, Integer rowsPerPage) {
         return penjualanRepository.cariPenjualan(key, value, pageNumber, rowsPerPage);

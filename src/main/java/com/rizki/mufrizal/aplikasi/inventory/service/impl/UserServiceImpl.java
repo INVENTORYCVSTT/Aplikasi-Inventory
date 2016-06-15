@@ -25,9 +25,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +40,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("UserService")
 @Transactional(readOnly = true)
-@CacheConfig(cacheNames = "user")
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -51,7 +47,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Cacheable(key = "#email")
     @Override
     public User loginUser(String email, String password) {
 
@@ -67,7 +62,6 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @CacheEvict(key = "#user", allEntries = true)
     @Transactional
     @Override
     public void simpanUser(User user) {
@@ -85,7 +79,6 @@ public class UserServiceImpl implements UserService {
         userRepository.simpanUser(user);
     }
 
-    @Cacheable(key = "#email")
     @Override
     public User cariUser(String email) {
         User user = userRepository.cariUser(email);

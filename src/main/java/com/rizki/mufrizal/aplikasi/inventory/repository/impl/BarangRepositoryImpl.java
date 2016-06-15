@@ -96,7 +96,7 @@ public class BarangRepositoryImpl implements BarangRepository {
                 .add(Restrictions.like(key, "%" + value + "%"))
                 .setFirstResult(rowsPerPage * (pageNumber - 1))
                 .setMaxResults(rowsPerPage)
-                .setCacheable(true)
+                .setCacheable(Boolean.TRUE)
                 .list();
     }
 

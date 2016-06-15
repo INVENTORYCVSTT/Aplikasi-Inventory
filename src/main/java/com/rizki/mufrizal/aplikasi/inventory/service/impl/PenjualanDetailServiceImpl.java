@@ -20,8 +20,6 @@ import com.rizki.mufrizal.aplikasi.inventory.repository.PenjualanDetailRepositor
 import com.rizki.mufrizal.aplikasi.inventory.service.PenjualanDetailService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,13 +35,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("PenjualanDetailService")
 @Transactional
-@CacheConfig(cacheNames = "barang")
 public class PenjualanDetailServiceImpl implements PenjualanDetailService {
 
     @Autowired
     private PenjualanDetailRepository penjualanDetailRepository;
 
-    @Cacheable(key = "#kodeTransaksiPenjualan")
     @Override
     public List<PenjualanDetail> ambilPenjualanDetails(String kodeTransaksiPenjualan) {
         return penjualanDetailRepository.ambilPenjualanDetails(kodeTransaksiPenjualan);

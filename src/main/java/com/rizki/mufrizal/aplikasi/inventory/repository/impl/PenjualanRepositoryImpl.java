@@ -20,8 +20,6 @@ import com.rizki.mufrizal.aplikasi.inventory.repository.PenjualanRepository;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
